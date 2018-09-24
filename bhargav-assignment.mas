@@ -87,7 +87,7 @@ value : dw 0
 inbuf:  dw 2096 dup 0
 count : dw 26 dup 0 
 msgl:   dw "input a string"
-msg2:   dw "Input a string of up to 2096 characters."
+msg2:   dw "Input a string of characters."
 msg3:   dw "press yes to continue r n to quit"
 outputmsg:  dw "The count For  "
 outputmsg1:  dw " is =   "
