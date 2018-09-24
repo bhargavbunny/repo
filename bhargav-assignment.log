@@ -1,0 +1,41 @@
+sim Version 6.3 Log File bhargav-assignment.log
+
+Your name          = Run mod sim /r to put your name here
+Machinecode file   = bhargav-assignment.mac Size = 90B (hex) = 2315 (dec)
+Microcode file     = none         Size =  93 (hex) =  147 (dec)
+======================== Log turned on  Mon Sep 24 04:57:51 2018
+======================== Starting session ======================
+---- [T7] 0: ldc  /8 8A6/ n
+No display mode
+---- [T7] g
+Input a string of up to 2096 characters.abcdefghijklmnopqrstuvwxyzQWERTYUIOPLKJHGFDSAZXCVBNM
+abcdefghijklmnopqrstuvwxyzQWERTYUIOPLKJHGFDSAZXCVBNM
+The count For  A is =   2
+The count For  B is =   2
+The count For  C is =   2
+The count For  D is =   2
+The count For  E is =   2
+The count For  F is =   2
+The count For  G is =   2
+The count For  H is =   2
+The count For  I is =   2
+The count For  J is =   2
+The count For  K is =   2
+The count For  L is =   2
+The count For  M is =   2
+The count For  N is =   2
+The count For  O is =   2
+The count For  P is =   2
+The count For  Q is =   2
+The count For  R is =   2
+The count For  S is =   2
+The count For  T is =   2
+The count For  U is =   2
+The count For  V is =   2
+The count For  W is =   2
+The count For  X is =   2
+The count For  Y is =   2
+The count For  Z is =   2
+Machine inst count =   7F7 (hex) =   2039 (dec)
+Micro   inst count =  4F33 (hex) =  20275 (dec)
+---- [T7] ERROR: Keyboard end-of-file
