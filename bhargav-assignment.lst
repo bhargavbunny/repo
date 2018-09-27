@@ -1,0 +1,287 @@
+Machine-level Assembler Version 6.3    Thu Sep 27 09:53:28 2018
+
+  LOC    OBJ   SOURCE
+hex*dec
+
+0  *0    88E9  start:	ldc msg3
+1  *1    FFF7  		sout
+2  *2    FFFA  		ain
+3  *3    3070  		sub nconst
+4  *4    C061  		jz stop1
+5  *5    88CB  		ldc msg2
+6  *6    FFF7  		sout
+7  *7    8072  		ldc inbuf
+8  *8    FFF6  		sin
+9  *9    FFF7  		sout
+A  *10   800A  		ldc '\n'
+B  *11   FFFB  		aout
+C  *12   8072  loop1:  ldc inbuf
+D  *13   206A  		add index; address of next character in string1
+E  *14   F100  		ldi
+F  *15   C02A  		jz stop; and of string
+10 *16   1065  		st curr
+11 *17   306C  		sub aconst
+12 *18   B01A  		jn next ; test if character is a sma11 1etter
+13 *19   0065  		ld curr
+14 *20   306E  		sub zconst
+15 *21   3067  		sub one
+16 *22   A01A  		jzop next ; if not a sma11 1etter, process next character
+17 *23   0065  		ld curr ; 1f a sma11 1etter, convert to upper case
+18 *24   2069  		add conv
+19 *25   1065  		st curr
+1A *26   0065  next:   ld curr
+               		;aout
+1B *27   006A  		ld index
+1C *28   2067  		add one
+1D *29   106A  		st index
+1E *30   0065  		ld curr
+1F *31   306D  		sub Aconst
+               		;dout
+20 *32   1071  		st value
+21 *33   88A2  		ldc count
+22 *34   2071          add value
+23 *35   1071          st value
+24 *36   F100          ldi
+25 *37   2067          add one
+                       ;dout
+26 *38   F300          push
+27 *39   0071          ld value
+28 *40   F200          sti
+29 *41   900C  		ja loop1
+               		
+2A *42   890B  stop:	ldc outputmsg
+2B *43   FFF7  		sout
+2C *44   0924  		ld alphabet
+2D *45   FFFB  		aout
+2E *46   891B  		ldc outputmsg1
+2F *47   FFF7  		sout
+30 *48   88A2  		ldc count
+31 *49   2068  		add OutputCounter
+32 *50   F100  		ldi
+33 *51   1066  		st curr1
+34 *52   FFFD  		dout
+35 *53   800A  		ldc '\n'
+36 *54   FFFB  		aout
+37 *55   0068  		ld OutputCounter
+38 *56   2067  		add one
+39 *57   1068  		st OutputCounter
+               		;dout
+3A *58   0924  		ld alphabet
+3B *59   2067  		add one
+3C *60   1924  		st alphabet
+3D *61   0062  		ld counter
+3E *62   2067  		add one
+3F *63   1062  		st counter
+40 *64   3063  		sub max
+41 *65   C043  		jz clear
+42 *66   902A  		ja stop
+               		
+43 *67   0926  clear:  ld zero
+44 *68   1062  		st counter
+45 *69   106A  		st index
+46 *70   1065  		st curr
+47 *71   1066  		st curr1
+48 *72   1071  		st value
+49 *73   1068  		st OutputCounter
+4A *74   800A  		ldc '\n'
+4B *75   FFFB  		aout
+4C *76   0062  		ld counter
+4D *77   FFFD  		dout
+4E *78   0925  		ld clearalphabet
+4F *79   1924  		st alphabet
+50 *80   006B  clst:   ld index2
+51 *81   F300  		push
+52 *82   88A2  		ldc count
+53 *83   F200  		sti
+54 *84   006B  		ld index2
+55 *85   2067  		add one
+56 *86   106B  		st index2
+57 *87   0064  		ld length
+58 *88   3067  		sub one
+59 *89   1064  		st length
+5A *90   C05C  		jz clcount
+5B *91   9050  		ja clst
+5C *92   0926  clcount:ld zero
+5D *93   106B  		st index2
+5E *94   0063  		ld max
+5F *95   1064  		st length
+60 *96   9000  		ja start
+61 *97   FFFF  stop1:	halt
+               		end start
+               			
+                                          ;data area
+62 *98   0000  counter:		dw 0
+63 *99   001A  max    :		dw 26
+64 *100  001A  length :		dw 26
+65 *101  0000  curr:   		dw 0
+66 *102  0000  curr1:   		dw 0
+67 *103  0001  one:    		dw 1
+68 *104  0000  OutputCounter: 	dw 0
+69 *105  FFE0  conv:   		dw -32
+6A *106  0000  index:  		dw 0
+6B *107  0000  index2:  		dw 0
+6C *108  0061  aconst: 		dw 'a'
+6D *109  0041  Aconst: 		dw 'A'
+6E *110  007A  zconst: 		dw 'z'
+6F *111  0079  yconst: 		dw 'y'
+70 *112  006E  nconst: 		dw 'n'
+71 *113  0000  value : 		dw 0
+72 *114  0000  inbuf:  		dw 2096 dup 0
+8A2*2210 0000  count : 		dw 26 dup 0 
+8BC*2236 0069  msgl:   		dw "input a string"
+8BD*2237 006E
+8BE*2238 0070
+8BF*2239 0075
+8C0*2240 0074
+8C1*2241 0020
+8C2*2242 0061
+8C3*2243 0020
+8C4*2244 0073
+8C5*2245 0074
+8C6*2246 0072
+8C7*2247 0069
+8C8*2248 006E
+8C9*2249 0067
+8CA*2250 0000
+8CB*2251 0049  msg2:   		dw "Input a string of characters."
+8CC*2252 006E
+8CD*2253 0070
+8CE*2254 0075
+8CF*2255 0074
+8D0*2256 0020
+8D1*2257 0061
+8D2*2258 0020
+8D3*2259 0073
+8D4*2260 0074
+8D5*2261 0072
+8D6*2262 0069
+8D7*2263 006E
+8D8*2264 0067
+8D9*2265 0020
+8DA*2266 006F
+8DB*2267 0066
+8DC*2268 0020
+8DD*2269 0063
+8DE*2270 0068
+8DF*2271 0061
+8E0*2272 0072
+8E1*2273 0061
+8E2*2274 0063
+8E3*2275 0074
+8E4*2276 0065
+8E5*2277 0072
+8E6*2278 0073
+8E7*2279 002E
+8E8*2280 0000
+8E9*2281 0070  msg3:   		dw "press yes to continue r n to quit"
+8EA*2282 0072
+8EB*2283 0065
+8EC*2284 0073
+8ED*2285 0073
+8EE*2286 0020
+8EF*2287 0079
+8F0*2288 0065
+8F1*2289 0073
+8F2*2290 0020
+8F3*2291 0074
+8F4*2292 006F
+8F5*2293 0020
+8F6*2294 0063
+8F7*2295 006F
+8F8*2296 006E
+8F9*2297 0074
+8FA*2298 0069
+8FB*2299 006E
+8FC*2300 0075
+8FD*2301 0065
+8FE*2302 0020
+8FF*2303 0072
+900*2304 0020
+901*2305 006E
+902*2306 0020
+903*2307 0074
+904*2308 006F
+905*2309 0020
+906*2310 0071
+907*2311 0075
+908*2312 0069
+909*2313 0074
+90A*2314 0000
+90B*2315 0054  outputmsg:  	dw "The count For  "
+90C*2316 0068
+90D*2317 0065
+90E*2318 0020
+90F*2319 0063
+910*2320 006F
+911*2321 0075
+912*2322 006E
+913*2323 0074
+914*2324 0020
+915*2325 0046
+916*2326 006F
+917*2327 0072
+918*2328 0020
+919*2329 0020
+91A*2330 0000
+91B*2331 0020  outputmsg1:  	dw " is =   "
+91C*2332 0069
+91D*2333 0073
+91E*2334 0020
+91F*2335 003D
+920*2336 0020
+921*2337 0020
+922*2338 0020
+923*2339 0000
+924*2340 0041  alphabet: 		dw 65
+925*2341 0041  clearalphabet: 	dw 65
+926*2342 0000  zero :          dw 0
+927*2343 ========= end of bhargav-assignment.mas =================
+
+
+         Symbol/Cross-Reference Table
+
+Symbol                   Address     References
+                          (hex)       (hex)
+
+ start                     0           62  60 
+ loop1                     C           29 
+ next                      1A          12  16 
+ stop                      2A          F   42 
+ clear                     43          41 
+ clst                      50          5B 
+ clcount                   5C          5A 
+ stop1                     61          4  
+ counter                   62          3D  3F  44  4C 
+ max                       63          40  5E 
+ length                    64          57  59  5F 
+ curr                      65          10  13  17  19  1A 
+                                       1E  46 
+ curr1                     66          33  47 
+ one                       67          15  1C  25  38  3B 
+                                       3E  55  58 
+ OutputCounter             68          31  37  39  49 
+ conv                      69          18 
+ index                     6A          D   1B  1D  45 
+ index2                    6B          50  54  56  5D 
+ aconst                    6C          11 
+ Aconst                    6D          1F 
+ zconst                    6E          14 
+ yconst                    6F         
+ nconst                    70          3  
+ value                     71          20  22  23  27  48 
+ inbuf                     72          7   C  
+ count                     8A2         21  30  52 
+ msgl                      8BC        
+ msg2                      8CB         5  
+ msg3                      8E9         0  
+ outputmsg                 90B         2A 
+ outputmsg1                91B         2E 
+ alphabet                  924         2C  3A  3C  4F 
+ clearalphabet             925         4E 
+ zero                      926         43  5C 
+
+Input file   = bhargav-assignment.mas
+Output file  = bhargav-assignment.mac
+List file    = bhargav-assignment.lst 
+Number base  = decimal
+Label status = case sensitive
