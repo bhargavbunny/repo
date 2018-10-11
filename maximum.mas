@@ -1,0 +1,96 @@
+msg1: dw "Enter the dividend(n) = "
+msg2: dw "Enter the divisor(m) = "
+numb1: dw 0
+numb2: dw 0
+count: dw 0
+one: dw 1
+msg3: dw "Quotient(q) is "
+msg4: dw " and the remainder(r) is  "
+msg5: dw "wanna check more y/n "
+yes : dw 'y'
+zero: dw 0
+flag: dw 0
+
+
+
+main: 	ldc msg1
+		sout
+		din
+		push
+		ldc msg2
+		sout
+		din
+		push
+
+		ldr 1
+		st numb1
+		jz exit
+		jn chang1
+		
+back:	pop
+		st numb2
+		jn chang3
+		
+loop:	call loop1
+
+rtn:	ldc '\n'
+		aout
+		
+exit:	ld flag
+		sub one
+		jz chang2
+back2:	ldc msg3
+		sout
+		ld count
+		dout
+		ldc msg4
+		sout
+		ld numb1
+		dout
+		ld zero
+		st numb1
+		st numb2
+		st count
+		st flag
+		ldr 1
+		pop
+		ldc '\n'
+		aout
+		ldc msg5
+		sout
+		ain
+		sub yes
+		jz main
+		halt
+chang1: ld numb1
+		sub numb1
+		sub numb1
+		st numb1
+		ld flag
+		add one
+		st flag
+		ja back
+chang2: ld count
+		sub count
+		sub count
+		st count
+		ja back2
+chang3: ld numb2
+		sub numb2
+		sub numb2
+		st numb2
+		ld flag
+		add one
+		st flag
+		ja loop
+		
+loop1:	ld numb1
+		sub numb2
+		jn exit
+		st numb1
+		ld count
+		ld count
+		add one
+		st count
+		ja loop1
+quit:   ret
