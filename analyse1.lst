@@ -1,0 +1,273 @@
+Machine-level Assembler Version 6.3    Thu Oct 18 05:08:35 2018
+
+  LOC    OBJ   SOURCE
+hex*dec
+
+               
+0  *0    800A  main:	ldc '\n'
+1  *1    FFFB          aout
+2  *2    0072          ld zero
+3  *3    106B       	st index
+4  *4    106C       	st index1
+5  *5    106D       	st index2
+6  *6    106F       	st index4
+7  *7    106E       	st index3
+8  *8    1070       	st count
+9  *9    811D  loop2:	ldc buffer1
+A  *10   206E  		add index3
+B  *11   F100  		ldi
+C  *12   C018  		jz main2
+D  *13   816E  		ldc buffer2
+E  *14   206E  		add index3
+F  *15   F100  		ldi
+10 *16   F300  		push
+11 *17   811D  		ldc buffer1
+12 *18   206E  		add index3
+13 *19   F200  		sti
+14 *20   006E  		ld index3
+15 *21   2071  		add one
+16 *22   106E  		st index3
+17 *23   9009  		ja loop2
+18 *24   800A  main2:  ldc '\n'
+19 *25   FFFB  		aout
+1A *26   8074  		ldc inprompt
+1B *27   FFF7          sout
+1C *28   FFFA  		ain
+1D *29   3073  		sub yes
+1E *30   D06A  		jnz exit
+1F *31   8096  		ldc msg1
+20 *32   FFF7  		sout 
+21 *33   80CC  		ldc buffer
+22 *34   FFF6  		sin
+23 *35   80CC  loop:	ldc buffer
+24 *36   206B  		add index
+25 *37   F100  		ldi
+26 *38   C044  		jz output1
+27 *39   31BF  		sub c
+28 *40   B040  		jn temp1
+29 *41   80CC  		ldc buffer
+2A *42   206B  		add index
+2B *43   F100  		ldi
+2C *44   31C0  		sub r
+2D *45   A038  		jzop temp
+2E *46   21C0  		add r
+2F *47   20CB  		add convert
+30 *48   F300          push
+31 *49   811D  		ldc buffer1
+32 *50   206F  		add index4
+33 *51   F200  		sti
+34 *52   006F  		ld index4
+35 *53   2071  		add one
+36 *54   106F  		st index4
+37 *55   9040  		ja temp1
+38 *56   21C0  temp:	add r
+39 *57   F300  		push
+3A *58   811D  		ldc buffer1
+3B *59   206F  		add index4
+3C *60   F200  		sti
+3D *61   006F  		ld index4
+3E *62   2071  		add one
+3F *63   106F  		st index4
+40 *64   006B  temp1:	ld index
+41 *65   2071  		add one
+42 *66   106B  		st index
+43 *67   9023  		ja loop
+44 *68   811D  output1: ldc buffer1
+45 *69   FFF7  		sout	
+46 *70   E047  		call pal
+47 *71   811D  pal:	ldc buffer1
+48 *72   206C  		add index1
+49 *73   F100  		ldi
+4A *74   C051  		jz loop1
+4B *75   F300  		push
+4C *76   0070  		ld count
+4D *77   2071  		add one
+4E *78   1070  		st count
+4F *79   9060  		ja inc1
+50 *80   9047  pal2:	ja pal	
+51 *81   F400  loop1:	pop
+52 *82   10CA  		st tempC
+53 *83   811D  		ldc buffer1
+54 *84   206D  		add index2
+55 *85   F100  		ldi
+56 *86   30CA  		sub tempC
+57 *87   D067  		jnz output
+58 *88   0070  		ld count
+59 *89   3071  		sub one
+5A *90   1070  		st count
+5B *91   C064  		jz compute
+5C *92   006D  inc2:	ld index2
+5D *93   2071  		add one
+5E *94   106D  		st index2
+5F *95   9051  		ja loop1	
+60 *96   006C  inc1:	ld index1
+61 *97   2071  		add one
+62 *98   106C  		st index1
+63 *99   9050  		ja pal2	
+64 *100  80A8  compute:ldc msg2
+65 *101  FFF7  		sout
+66 *102  9000  		ja main
+67 *103  80B7  output:	ldc msg3
+68 *104  FFF7  		sout	
+69 *105  9000  		ja main
+6A *106  FFFF  exit:   halt
+               
+               	                         
+6B *107  0000  index: dw 0
+6C *108  0000  index1:  dw 0 
+6D *109  0000  index2:  dw 0
+6E *110  0000  index3: dw 0
+6F *111  0000  index4: dw 0
+70 *112  0000  count:  dw 0
+71 *113  0001  one: dw 1	
+72 *114  0000  zero: dw 0
+73 *115  0079  yes: dw 'y'
+74 *116  0074  inprompt: dw "test palindrome'y' otherwise'n': "
+75 *117  0065
+76 *118  0073
+77 *119  0074
+78 *120  0020
+79 *121  0070
+7A *122  0061
+7B *123  006C
+7C *124  0069
+7D *125  006E
+7E *126  0064
+7F *127  0072
+80 *128  006F
+81 *129  006D
+82 *130  0065
+83 *131  0027
+84 *132  0079
+85 *133  0027
+86 *134  0020
+87 *135  006F
+88 *136  0074
+89 *137  0068
+8A *138  0065
+8B *139  0072
+8C *140  0077
+8D *141  0069
+8E *142  0073
+8F *143  0065
+90 *144  0027
+91 *145  006E
+92 *146  0027
+93 *147  003A
+94 *148  0020
+95 *149  0000
+96 *150  0045  msg1: dw "Enter the string:"
+97 *151  006E
+98 *152  0074
+99 *153  0065
+9A *154  0072
+9B *155  0020
+9C *156  0074
+9D *157  0068
+9E *158  0065
+9F *159  0020
+A0 *160  0073
+A1 *161  0074
+A2 *162  0072
+A3 *163  0069
+A4 *164  006E
+A5 *165  0067
+A6 *166  003A
+A7 *167  0000
+A8 *168  0020  msg2: dw " is palindrome"
+A9 *169  0069
+AA *170  0073
+AB *171  0020
+AC *172  0070
+AD *173  0061
+AE *174  006C
+AF *175  0069
+B0 *176  006E
+B1 *177  0064
+B2 *178  0072
+B3 *179  006F
+B4 *180  006D
+B5 *181  0065
+B6 *182  0000
+B7 *183  0020  msg3: dw " is not palindrome"
+B8 *184  0069
+B9 *185  0073
+BA *186  0020
+BB *187  006E
+BC *188  006F
+BD *189  0074
+BE *190  0020
+BF *191  0070
+C0 *192  0061
+C1 *193  006C
+C2 *194  0069
+C3 *195  006E
+C4 *196  0064
+C5 *197  0072
+C6 *198  006F
+C7 *199  006D
+C8 *200  0065
+C9 *201  0000
+CA *202  0000  tempC: dw 0
+CB *203  0020  convert: dw  32
+CC *204  0000  buffer: dw 81 dup 0
+11D*285  0000  buffer1: dw 81 dup 0
+16E*366  0000  buffer2: dw 81 dup 0 
+1BF*447  003B  c: dw 59
+1C0*448  0061  r:  dw 97
+               
+               
+               	
+1C1*449  ========= end of analyse1.mas ===========================
+
+
+         Symbol/Cross-Reference Table
+
+Symbol                   Address     References
+                          (hex)       (hex)
+
+ main                      0           66  69 
+ loop2                     9           17 
+ main2                     18          C  
+ loop                      23          43 
+ temp                      38          2D 
+ temp1                     40          28  37 
+ output1                   44          26 
+ pal                       47          46  50 
+ pal2                      50          63 
+ loop1                     51          4A  5F 
+ inc2                      5C         
+ inc1                      60          4F 
+ compute                   64          5B 
+ output                    67          57 
+ exit                      6A          1E 
+ index                     6B          3   24  2A  40  42 
+ index1                    6C          4   48  60  62 
+ index2                    6D          5   54  5C  5E 
+ index3                    6E          7   A   E   12  14 
+                                       16 
+ index4                    6F          6   32  34  36  3B 
+                                       3D  3F 
+ count                     70          8   4C  4E  58  5A 
+ one                       71          15  35  3E  41  4D 
+                                       59  5D  61 
+ zero                      72          2  
+ yes                       73          1D 
+ inprompt                  74          1A 
+ msg1                      96          1F 
+ msg2                      A8          64 
+ msg3                      B7          67 
+ tempC                     CA          52  56 
+ convert                   CB          2F 
+ buffer                    CC          21  23  29 
+ buffer1                   11D         9   11  31  3A  44 
+                                       47  53 
+ buffer2                   16E         D  
+ c                         1BF         27 
+ r                         1C0         2C  2E  38 
+
+Input file   = analyse1.mas
+Output file  = analyse1.mac
+List file    = analyse1.lst 
+Number base  = decimal
+Label status = case sensitive

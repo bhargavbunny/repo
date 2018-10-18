@@ -1,9 +1,9 @@
 sim Version 6.3 Log File maximum.log
 
 Your name          = Run mod sim /r to put your name here
-Machinecode file   = maximum.mac  Size =  C4 (hex) =  196 (dec)
+Machinecode file   = maximum.mac  Size =  D1 (hex) =  209 (dec)
 Microcode file     = none         Size =  93 (hex) =  147 (dec)
-======================== Log turned on  Thu Oct 11 00:59:48 2018
+======================== Log turned on  Thu Oct 18 04:50:40 2018
 ======================== Starting session ======================
 ---- [T7] 0: ld   /0 045/ n
 No display mode
@@ -18,7 +18,7 @@ Quotient(q) is 7 and the remainder(r) is  16
 wanna check more y/n y
 Enter the dividend(n) = -135
 Enter the divisor(m) = 17
-Quotient(q) is -7 and the remainder(r) is  16
+Quotient(q) is 7 and the remainder(r) is  -16
 wanna check more y/n y
 Enter the dividend(n) = 135
 Enter the divisor(m) = -17
@@ -34,10 +34,10 @@ Quotient(q) is 42 and the remainder(r) is  12
 wanna check more y/n y
 Enter the dividend(n) = -1146
 Enter the divisor(m) = -27
-Quotient(q) is 42 and the remainder(r) is  12
+Quotient(q) is 42 and the remainder(r) is  -12
 wanna check more y/n n
 
-Machine inst count =   5A5 (hex) =   1445 (dec)
-Micro   inst count =  365E (hex) =  13918 (dec)
+Machine inst count =   5C7 (hex) =   1479 (dec)
+Micro   inst count =  37B1 (hex) =  14257 (dec)
 ---- [T7] q
-================== sim(b97e) terminated Thu Oct 11 01:02:17 2018
+================== sim(efc1) terminated Thu Oct 18 04:52:08 2018

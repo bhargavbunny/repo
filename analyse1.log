@@ -1,0 +1,46 @@
+sim Version 6.3 Log File analyse1.log
+
+Your name          = Run mod sim /r to put your name here
+Machinecode file   = analyse1.mac Size = 1C1 (hex) =  449 (dec)
+Microcode file     = none         Size =  93 (hex) =  147 (dec)
+======================== Log turned on  Thu Oct 18 05:10:30 2018
+======================== Starting session ======================
+---- [T7] 0: ldc  /8 00A/ n
+No display mode
+---- [T7] g
+
+
+test palindrome'y' otherwise'n': y
+Enter the string:rotator
+rotator is palindrome
+
+test palindrome'y' otherwise'n': y
+Enter the string:racecar
+racecar is palindrome
+
+test palindrome'y' otherwise'n': y
+Enter the string:abboubba
+abboubba is not palindrome
+
+test palindrome'y' otherwise'n': y
+Enter the string:kayak
+kayak is palindrome
+
+test palindrome'y' otherwise'n': y
+Enter the string:rear
+rear is not palindrome
+
+test palindrome'y' otherwise'n': y
+Enter the string:noon
+noon is palindrome
+
+test palindrome'y' otherwise'n': y
+Enter the string:anna
+anna is palindrome
+
+test palindrome'y' otherwise'n': n
+
+Machine inst count =   AD6 (hex) =   2774 (dec)
+Micro   inst count =  70F9 (hex) =  28921 (dec)
+---- [T7] q
+================== sim(3a8b) terminated Thu Oct 18 05:11:37 2018

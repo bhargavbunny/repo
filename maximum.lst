@@ -1,4 +1,4 @@
-Machine-level Assembler Version 6.3    Thu Oct 11 00:59:41 2018
+Machine-level Assembler Version 6.3    Thu Oct 18 04:47:41 2018
 
   LOC    OBJ   SOURCE
 hex*dec
@@ -123,92 +123,112 @@ F  *15   0065
 75 *117  0000
 76 *118  0079  yes : dw 'y'
 77 *119  0000  zero: dw 0
-78 *120  0000  flag: dw 0
+78 *120  0000  flag1: dw 0
+79 *121  0000  flag2: dw 0
                
                
                
-79 *121  8000  main: 	ldc msg1
-7A *122  FFF7  		sout
-7B *123  FFFC  		din
-7C *124  F300  		push
-7D *125  8019  		ldc msg2
-7E *126  FFF7  		sout
-7F *127  FFFC  		din
-80 *128  F300  		push
+7A *122  8000  main: 	ldc msg1
+7B *123  FFF7  		sout
+7C *124  FFFC  		din
+7D *125  F300  		push
+7E *126  8019  		ldc msg2
+7F *127  FFF7  		sout
+80 *128  FFFC  		din
+81 *129  F300  		push
                
-81 *129  4001  		ldr 1
-82 *130  1031  		st numb1
-83 *131  C08B  		jz exit
-84 *132  B0A5  		jn chang1
+82 *130  4001  		ldr 1
+83 *131  1031  		st numb1
+84 *132  C08C  		jz exit
+85 *133  B0AA  		jn chang1
                		
-85 *133  F400  back:	pop
-86 *134  1032  		st numb2
-87 *135  B0B2  		jn chang3
+86 *134  F400  back:	pop
+87 *135  1032  		st numb2
+88 *136  B0BF  		jn chang3
                		
-88 *136  E0BA  loop:	call loop1
+89 *137  E0C7  loop:	call loop1
                
-89 *137  800A  rtn:	ldc '\n'
-8A *138  FFFB  		aout
+8A *138  800A  rtn:	ldc '\n'
+8B *139  FFFB  		aout
                		
-8B *139  0078  exit:	ld flag
-8C *140  3034  		sub one
-8D *141  C0AD  		jz chang2
-8E *142  8035  back2:	ldc msg3
-8F *143  FFF7  		sout
-90 *144  0033  		ld count
-91 *145  FFFD  		dout
-92 *146  8045  		ldc msg4
+8C *140  0078  exit:	ld flag1
+8D *141  3034  		sub one
+8E *142  C0B2  		jz chang2
+8F *143  0079  		ld flag2
+90 *144  3034  		sub one
+91 *145  C0BA  		jz chang4
+               		
+               		
+92 *146  8035  back2:	ldc msg3
 93 *147  FFF7  		sout
-94 *148  0031  		ld numb1
+94 *148  0033  		ld count
 95 *149  FFFD  		dout
-96 *150  0077  		ld zero
-97 *151  1031  		st numb1
-98 *152  1032  		st numb2
-99 *153  1033  		st count
-9A *154  1078  		st flag
-9B *155  4001  		ldr 1
-9C *156  F400  		pop
-9D *157  800A  		ldc '\n'
-9E *158  FFFB  		aout
-9F *159  8060  		ldc msg5
-A0 *160  FFF7  		sout
-A1 *161  FFFA  		ain
-A2 *162  3076  		sub yes
-A3 *163  C079  		jz main
-A4 *164  FFFF  		halt
-A5 *165  0031  chang1: ld numb1
-A6 *166  3031  		sub numb1
-A7 *167  3031  		sub numb1
-A8 *168  1031  		st numb1
-A9 *169  0078  		ld flag
-AA *170  2034  		add one
-AB *171  1078  		st flag
-AC *172  9085  		ja back
-AD *173  0033  chang2: ld count
-AE *174  3033  		sub count
-AF *175  3033  		sub count
-B0 *176  1033  		st count
-B1 *177  908E  		ja back2
-B2 *178  0032  chang3: ld numb2
-B3 *179  3032  		sub numb2
-B4 *180  3032  		sub numb2
-B5 *181  1032  		st numb2
-B6 *182  0078  		ld flag
-B7 *183  2034  		add one
-B8 *184  1078  		st flag
-B9 *185  9088  		ja loop
+96 *150  8045  		ldc msg4
+97 *151  FFF7  		sout
+98 *152  0031  		ld numb1
+99 *153  FFFD  		dout
+9A *154  0077  		ld zero
+9B *155  1031  		st numb1
+9C *156  1032  		st numb2
+9D *157  1033  		st count
+9E *158  1078  		st flag1
+9F *159  1079  		st flag2
+A0 *160  4001  		ldr 1
+A1 *161  F400  		pop
+A2 *162  800A  		ldc '\n'
+A3 *163  FFFB  		aout
+A4 *164  8060  		ldc msg5
+A5 *165  FFF7  		sout
+A6 *166  FFFA  		ain
+A7 *167  3076  		sub yes
+A8 *168  C07A  		jz main
+A9 *169  FFFF  		halt
+               
+AA *170  0031  chang1: ld numb1
+AB *171  3031  		sub numb1
+AC *172  3031  		sub numb1
+AD *173  1031  		st numb1
+AE *174  0078  		ld flag1
+AF *175  2034  		add one
+B0 *176  1078  		st flag1
+B1 *177  9086  		ja back
+               
+B2 *178  0079  chang2: ld flag2
+B3 *179  3034  		sub one
+B4 *180  C0B5  		jz chang5
+B5 *181  0031  chang5:	ld numb1
+B6 *182  3031  		sub numb1
+B7 *183  3031  		sub numb1
+B8 *184  1031  		st numb1
+B9 *185  9092  		ja back2
                		
-BA *186  0031  loop1:	ld numb1
-BB *187  3032  		sub numb2
-BC *188  B08B  		jn exit
-BD *189  1031  		st numb1
-BE *190  0033  		ld count
-BF *191  0033  		ld count
-C0 *192  2034  		add one
-C1 *193  1033  		st count
-C2 *194  90BA  		ja loop1
-C3 *195  F000  quit:   ret
-C4 *196  ========= end of maximum.mas ============================
+BA *186  0033  chang4: ld count
+BB *187  3033  		sub count
+BC *188  3033  		sub count
+BD *189  1033  		st count
+BE *190  9092  		ja back2
+               
+BF *191  0032  chang3: ld numb2
+C0 *192  3032  		sub numb2
+C1 *193  3032  		sub numb2
+C2 *194  1032  		st numb2
+C3 *195  0079  		ld flag2
+C4 *196  2034  		add one
+C5 *197  1079  		st flag2
+C6 *198  9089  		ja loop
+               		
+C7 *199  0031  loop1:	ld numb1
+C8 *200  3032  		sub numb2
+C9 *201  B08C  		jn exit
+CA *202  1031  		st numb1
+CB *203  0033  		ld count
+CC *204  0033  		ld count
+CD *205  2034  		add one
+CE *206  1033  		st count
+CF *207  90C7  		ja loop1
+               
+D0 *208  F000  quit:   ret
+D1 *209  ========= end of maximum.mas ============================
 
 
          Symbol/Cross-Reference Table
@@ -216,33 +236,37 @@ C4 *196  ========= end of maximum.mas ============================
 Symbol                   Address     References
                           (hex)       (hex)
 
- msg1                      0           79 
- msg2                      19          7D 
- numb1                     31          82  94  97  A5  A6 
-                                       A7  A8  BA  BD 
- numb2                     32          86  98  B2  B3  B4 
-                                       B5  BB 
- count                     33          90  99  AD  AE  AF 
-                                       B0  BE  BF  C1 
- one                       34          8C  AA  B7  C0 
- msg3                      35          8E 
- msg4                      45          92 
- msg5                      60          9F 
- yes                       76          A2 
- zero                      77          96 
- flag                      78          8B  9A  A9  AB  B6 
-                                       B8 
- main                      79          A3 
- back                      85          AC 
- loop                      88          B9 
- rtn                       89         
- exit                      8B          83  BC 
- back2                     8E          B1 
- chang1                    A5          84 
- chang2                    AD          8D 
- chang3                    B2          87 
- loop1                     BA          88  C2 
- quit                      C3         
+ msg1                      0           7A 
+ msg2                      19          7E 
+ numb1                     31          83  98  9B  AA  AB 
+                                       AC  AD  B5  B6  B7 
+                                       B8  C7  CA 
+ numb2                     32          87  9C  BF  C0  C1 
+                                       C2  C8 
+ count                     33          94  9D  BA  BB  BC 
+                                       BD  CB  CC  CE 
+ one                       34          8D  90  AF  B3  C4 
+                                       CD 
+ msg3                      35          92 
+ msg4                      45          96 
+ msg5                      60          A4 
+ yes                       76          A7 
+ zero                      77          9A 
+ flag1                     78          8C  9E  AE  B0 
+ flag2                     79          8F  9F  B2  C3  C5 
+ main                      7A          A8 
+ back                      86          B1 
+ loop                      89          C6 
+ rtn                       8A         
+ exit                      8C          84  C9 
+ back2                     92          B9  BE 
+ chang1                    AA          85 
+ chang2                    B2          8E 
+ chang5                    B5          B4 
+ chang4                    BA          91 
+ chang3                    BF          88 
+ loop1                     C7          89  CF 
+ quit                      D0         
 
 Input file   = maximum.mas
 Output file  = maximum.mac

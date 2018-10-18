@@ -1,0 +1,133 @@
+
+main:	ldc '\n'
+        aout
+        ld zero
+     	st index
+     	st index1
+     	st index2
+     	st index4
+     	st index3
+     	st count
+loop2:	ldc buffer1
+		add index3
+		ldi
+		jz main2
+		ldc buffer2
+		add index3
+		ldi
+		push
+		ldc buffer1
+		add index3
+		sti
+		ld index3
+		add one
+		st index3
+		ja loop2
+main2:  ldc '\n'
+		aout
+		ldc msg4
+        sout
+		ain
+		sub yes
+		jnz exit
+		ldc msg1
+		sout 
+		ldc buffer
+		sin
+loop:	ldc buffer
+		add index
+		ldi
+		jz output1
+		sub c
+		jn temp1
+		ldc buffer
+		add index
+		ldi
+		sub r
+		jzop temp
+		add r
+		add convert
+        push
+		ldc buffer1
+		add index4
+		sti
+		ld index4
+		add one
+		st index4
+		ja temp1
+temp:	add r
+		push
+		ldc buffer1
+		add index4
+		sti
+		ld index4
+		add one
+		st index4
+temp1:	ld index
+		add one
+		st index
+		ja loop
+output1: ldc buffer1
+		sout	
+		call pal
+pal:	ldc buffer1
+		add index1
+		ldi
+		jz loop1
+		push
+		ld count
+		add one
+		st count
+		ja inc1
+pal2:	ja pal	
+loop1:	pop
+		st tempC
+		ldc buffer1
+		add index2
+		ldi
+		sub tempC
+		jnz output
+		ld count
+		sub one
+		st count
+		jz compute
+inc2:	ld index2
+		add one
+		st index2
+		ja loop1	
+inc1:	ld index1
+		add one
+		st index1
+		ja pal2	
+compute:ldc msg2
+		sout
+		ja main
+output:	ldc msg3
+		sout	
+		ja main
+exit:   halt
+
+	                         
+index: dw 0
+index1:  dw 0 
+index2:  dw 0
+index3: dw 0
+index4: dw 0
+count:  dw 0
+one: dw 1	
+zero: dw 0
+yes: dw 'y'
+msg4: dw "test palindrome'y' otherwise'n': "
+msg1: dw "Enter the string:"
+msg2: dw " is palindrome"
+msg3: dw " is not palindrome"
+tempC: dw 0
+convert: dw  32
+buffer: dw 81 dup 0
+buffer1: dw 81 dup 0
+buffer2: dw 81 dup 0 
+c: dw 59
+r:  dw 97
+
+
+	

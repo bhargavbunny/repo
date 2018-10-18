@@ -9,7 +9,8 @@ msg4: dw " and the remainder(r) is  "
 msg5: dw "wanna check more y/n "
 yes : dw 'y'
 zero: dw 0
-flag: dw 0
+flag1: dw 0
+flag2: dw 0
 
 
 
@@ -36,9 +37,14 @@ loop:	call loop1
 rtn:	ldc '\n'
 		aout
 		
-exit:	ld flag
+exit:	ld flag1
 		sub one
 		jz chang2
+		ld flag2
+		sub one
+		jz chang4
+		
+		
 back2:	ldc msg3
 		sout
 		ld count
@@ -51,7 +57,8 @@ back2:	ldc msg3
 		st numb1
 		st numb2
 		st count
-		st flag
+		st flag1
+		st flag2
 		ldr 1
 		pop
 		ldc '\n'
@@ -62,26 +69,38 @@ back2:	ldc msg3
 		sub yes
 		jz main
 		halt
+
 chang1: ld numb1
 		sub numb1
 		sub numb1
 		st numb1
-		ld flag
+		ld flag1
 		add one
-		st flag
+		st flag1
 		ja back
-chang2: ld count
+
+chang2: ld flag2
+		sub one
+		jz chang5
+chang5:	ld numb1
+		sub numb1
+		sub numb1
+		st numb1
+		ja back2
+		
+chang4: ld count
 		sub count
 		sub count
 		st count
 		ja back2
+
 chang3: ld numb2
 		sub numb2
 		sub numb2
 		st numb2
-		ld flag
+		ld flag2
 		add one
-		st flag
+		st flag2
 		ja loop
 		
 loop1:	ld numb1
@@ -93,4 +112,5 @@ loop1:	ld numb1
 		add one
 		st count
 		ja loop1
+
 quit:   ret
