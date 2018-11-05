@@ -1,0 +1,252 @@
+Machine-level Assembler Version 6.3    Mon Nov 05 08:04:38 2018
+
+  LOC    OBJ   SOURCE
+hex*dec
+
+0  *0    80A6  			ldc table1
+1  *1    F700  			swap
+2  *2    0094  loop:   	ld tab_sum
+3  *3    6000  			addr 0
+4  *4    1094  			st tab_sum
+5  *5    F601  			dloc 1
+6  *6    0097  			ld tab_count
+7  *7    3098  			sub one
+8  *8    1097  			st tab_count
+9  *9    D002  			jnz loop
+A  *10   808D  			ldc message
+B  *11   FFF7  			sout
+C  *12   0094  			ld tab_sum
+D  *13   FFFD  			dout
+E  *14   800A  			ldc '\n'
+F  *15   FFFB  			aout
+               		
+10 *16   0094  			ld tab_sum
+11 *17   1099  			st mul_numb
+12 *18   009A  			ld six_cons
+13 *19   109C  			st mul_count
+14 *20   E05D  			call multi
+               		
+15 *21   800A  			ldc '\n'
+16 *22   FFFB  			aout
+17 *23   009D  			ld mul_answer
+18 *24   10A1  			st e1
+19 *25   FFFD  			dout
+               
+1A *26   00A1  			ld e1
+1B *27   109E  			st div_numb1
+1C *28   009B  			ld five_const
+1D *29   109F  			st div_numb2
+1E *30   800A  			ldc '\n'
+1F *31   FFFB  			aout
+20 *32   E065  			call div_mod
+               			
+21 *33   00A0      		ld div_answer
+22 *34   10A3  			st tab1_e1
+23 *35   FFFD  			dout
+               			
+24 *36   800A  			ldc '\n'
+25 *37   FFFB  			aout
+26 *38   00A5  			ld tab1_n1
+27 *39   30A0  			sub div_answer
+28 *40   10A5  			st tab1_n1
+29 *41   FFFD  			dout
+               			
+2A *42   00A5  			ld tab1_n1
+2B *43   1099  			st mul_numb
+2C *44   109C  			st mul_count
+               			
+2D *45   00A2  			ld zero
+2E *46   109D  			st mul_answer
+               			
+2F *47   E05D  			call multi
+               			
+30 *48   800A  			ldc '\n'
+31 *49   FFFB  			aout
+32 *50   009D  			ld mul_answer
+33 *51   FFFD  			dout
+               			
+34 *52   00A2  			ld zero
+35 *53   10A0  			st div_answer
+36 *54   009D  			ld mul_answer
+37 *55   109E  			st div_numb1
+38 *56   00A3  			ld tab1_e1
+39 *57   109F  			st div_numb2
+3A *58   E065  			call div_mod
+               			
+3B *59   800A  			ldc '\n'
+3C *60   FFFB  			aout
+3D *61   00A0  			ld div_answer
+3E *62   1095  			st quot_answer
+3F *63   009E  			ld div_numb1
+40 *64   00A2  			ld zero
+41 *65   109D  			st mul_answer
+42 *66   009E  			ld div_numb1
+43 *67   1099  			st mul_numb
+44 *68   00A4  			ld ten
+45 *69   109C  			st mul_count
+               			
+46 *70   E05D  			call multi
+               			
+47 *71   800A  			ldc '\n'
+48 *72   FFFB  			aout
+49 *73   009D  			ld mul_answer
+4A *74   109E  			st div_numb1
+4B *75   00A3  			ld tab1_e1
+4C *76   109F  			st div_numb2
+4D *77   00A2  			ld zero
+4E *78   10A0  			st div_answer
+4F *79   E065  			call div_mod
+               			
+50 *80   800A  			ldc '\n'
+51 *81   FFFB  			aout
+52 *82   00A0  			ld div_answer
+53 *83   1096  			st rem_answer
+               			
+54 *84   806E  			ldc message2
+55 *85   FFF7  			sout
+56 *86   0095  			ld quot_answer
+57 *87   FFFD  			dout
+58 *88   802E  			ldc '.'
+59 *89   FFFB  			aout
+5A *90   0096  			ld rem_answer
+5B *91   FFFD  			dout
+               			
+               			
+5C *92   FFFF  			halt
+               			
+5D *93   0099  multi:		ld mul_numb
+5E *94   209D  			add mul_answer
+5F *95   109D  			st mul_answer
+60 *96   009C  			ld mul_count
+61 *97   3098  			sub one
+62 *98   109C  			st mul_count
+63 *99   C06D  			jz next
+64 *100  905D  			ja multi
+               		
+               		
+65 *101  009E  div_mod: 	ld div_numb1
+66 *102  309F  			sub div_numb2
+67 *103  B06D  			jn next
+68 *104  109E  			st div_numb1
+69 *105  00A0  			ld div_answer
+6A *106  2098  			add one
+6B *107  10A0  			st div_answer
+6C *108  9065  			ja div_mod
+               		
+               		
+               		
+               		
+6D *109  F000  next : ret		
+               		
+               		
+               		
+               		
+               		
+               		
+6E *110  0050  message2:  dw "Percentage of category 1 is = "		
+6F *111  0065
+70 *112  0072
+71 *113  0063
+72 *114  0065
+73 *115  006E
+74 *116  0074
+75 *117  0061
+76 *118  0067
+77 *119  0065
+78 *120  0020
+79 *121  006F
+7A *122  0066
+7B *123  0020
+7C *124  0063
+7D *125  0061
+7E *126  0074
+7F *127  0065
+80 *128  0067
+81 *129  006F
+82 *130  0072
+83 *131  0079
+84 *132  0020
+85 *133  0031
+86 *134  0020
+87 *135  0069
+88 *136  0073
+89 *137  0020
+8A *138  003D
+8B *139  0020
+8C *140  0000
+8D *141  0073  message: 	dw "sum = "
+8E *142  0075
+8F *143  006D
+90 *144  0020
+91 *145  003D
+92 *146  0020
+93 *147  0000
+94 *148  0000  tab_sum:	dw 0
+95 *149  0000  quot_answer:dw 0
+96 *150  0000  rem_answer: dw 0
+97 *151  0006  tab_count:  dw 6
+98 *152  0001  one:	    dw 1
+99 *153  0000  mul_numb:   dw 0
+9A *154  0006  six_cons:   dw 6
+9B *155  0005  five_const: dw 5
+9C *156  0000  mul_count:  dw 0
+9D *157  0000  mul_answer: dw 0
+9E *158  0000  div_numb1:  dw 0
+9F *159  0000  div_numb2:  dw 0
+A0 *160  0000  div_answer: dw 0
+A1 *161  0000  e1:		    dw 0
+A2 *162  0000  zero:		dw 0
+A3 *163  0000  tab1_e1:	dw 0
+A4 *164  000A  ten:		dw 10
+A5 *165  0157  tab1_n1:	dw 343
+               
+               
+               
+A6 *166  007E  table1: 	dw 126
+A7 *167  0046  			dw 70
+A8 *168  0028  			dw 40
+A9 *169  0015  			dw 21
+AA *170  000A  			dw 10
+AB *171  0001  			dw 1
+AC *172  ========= end of assignment-3.mas =======================
+
+
+         Symbol/Cross-Reference Table
+
+Symbol                   Address     References
+                          (hex)       (hex)
+
+ loop                      2           9  
+ multi                     5D          14  2F  46  64 
+ div_mod                   65          20  3A  4F  6C 
+ next                      6D          63  67 
+ message2                  6E          54 
+ message                   8D          A  
+ tab_sum                   94          2   4   C   10 
+ quot_answer               95          3E  56 
+ rem_answer                96          53  5A 
+ tab_count                 97          6   8  
+ one                       98          7   61  6A 
+ mul_numb                  99          11  2B  43  5D 
+ six_cons                  9A          12 
+ five_const                9B          1C 
+ mul_count                 9C          13  2C  45  60  62 
+ mul_answer                9D          17  2E  32  36  41 
+                                       49  5E  5F 
+ div_numb1                 9E          1B  37  3F  42  4A 
+                                       65  68 
+ div_numb2                 9F          1D  39  4C  66 
+ div_answer                A0          21  27  35  3D  4E 
+                                       52  69  6B 
+ e1                        A1          18  1A 
+ zero                      A2          2D  34  40  4D 
+ tab1_e1                   A3          22  38  4B 
+ ten                       A4          44 
+ tab1_n1                   A5          26  28  2A 
+ table1                    A6          0  
+
+Input file   = assignment-3.mas
+Output file  = assignment-3.mac
+List file    = assignment-3.lst 
+Number base  = decimal
+Label status = case sensitive

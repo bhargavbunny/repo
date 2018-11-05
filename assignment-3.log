@@ -1,0 +1,19 @@
+sim Version 6.3 Log File assignment-3.log
+
+Your name          = Run mod sim /r to put your name here
+Machinecode file   = assignment-3.mac Size =  AC (hex) =  172 (dec)
+Microcode file     = none         Size =  93 (hex) =  147 (dec)
+======================== Log turned on  Mon Nov 05 08:04:41 2018
+======================== Starting session ======================
+---- [T7] 0: ldc  /8 0A6/ n
+No display mode
+---- [T7] g
+sum = 268
+
+1608
+321
+22
+484
+
+
+Percentage of category 1 is = 1.5

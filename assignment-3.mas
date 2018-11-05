@@ -1,0 +1,169 @@
+			ldc table1
+			swap
+loop:   	ld tab_sum
+			addr 0
+			st tab_sum
+			dloc 1
+			ld tab_count
+			sub one
+			st tab_count
+			jnz loop
+			ldc message
+			sout
+			ld tab_sum
+			dout
+			ldc '\n'
+			aout
+		
+			ld tab_sum
+			st mul_numb
+			ld six_cons
+			st mul_count
+			call multi
+		
+			ldc '\n'
+			aout
+			ld mul_answer
+			st e1
+			dout
+
+			ld e1
+			st div_numb1
+			ld five_const
+			st div_numb2
+			ldc '\n'
+			aout
+			call div_mod
+			
+    		ld div_answer
+			st tab1_e1
+			dout
+			
+			ldc '\n'
+			aout
+			ld tab1_n1
+			sub div_answer
+			st tab1_n1
+			dout
+			
+			ld tab1_n1
+			st mul_numb
+			st mul_count
+			
+			ld zero
+			st mul_answer
+			
+			call multi
+			
+			ldc '\n'
+			aout
+			ld mul_answer
+			dout
+			
+			ld zero
+			st div_answer
+			ld mul_answer
+			st div_numb1
+			ld tab1_e1
+			st div_numb2
+			call div_mod
+			
+			ldc '\n'
+			aout
+			ld div_answer
+			st quot_answer
+			ld div_numb1
+			ld zero
+			st mul_answer
+			ld div_numb1
+			st mul_numb
+			ld ten
+			st mul_count
+			
+			call multi
+			
+			ldc '\n'
+			aout
+			ld mul_answer
+			st div_numb1
+			ld tab1_e1
+			st div_numb2
+			ld zero
+			st div_answer
+			call div_mod
+			
+			ldc '\n'
+			aout
+			ld div_answer
+			st rem_answer
+			
+			ldc message2
+			sout
+			ld quot_answer
+			dout
+			ldc '.'
+			aout
+			ld rem_answer
+			dout
+			
+			
+			halt
+			
+multi:		ld mul_numb
+			add mul_answer
+			st mul_answer
+			ld mul_count
+			sub one
+			st mul_count
+			jz next
+			ja multi
+		
+		
+div_mod: 	ld div_numb1
+			sub div_numb2
+			jn next
+			st div_numb1
+			ld div_answer
+			add one
+			st div_answer
+			ja div_mod
+		
+		
+		
+		
+next : ret		
+		
+		
+		
+		
+		
+		
+message2:  dw "Percentage of category 1 is = "		
+message: 	dw "sum = "
+tab_sum:	dw 0
+quot_answer:dw 0
+rem_answer: dw 0
+tab_count:  dw 6
+one:	    dw 1
+mul_numb:   dw 0
+six_cons:   dw 6
+five_const: dw 5
+mul_count:  dw 0
+mul_answer: dw 0
+div_numb1:  dw 0
+div_numb2:  dw 0
+div_answer: dw 0
+e1:		    dw 0
+zero:		dw 0
+tab1_e1:	dw 0
+ten:		dw 10
+tab1_n1:	dw 343
+
+
+
+table1: 	dw 126
+			dw 70
+			dw 40
+			dw 21
+			dw 10
+			dw 1
