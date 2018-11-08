@@ -1,214 +1,564 @@
-Machine-level Assembler Version 6.3    Mon Nov 05 08:04:38 2018
+Machine-level Assembler Version 6.3    Thu Nov 08 09:56:23 2018
 
   LOC    OBJ   SOURCE
 hex*dec
 
-0  *0    80A6  			ldc table1
+0  *0    81A2  			ldc table1
 1  *1    F700  			swap
-2  *2    0094  loop:   	ld tab_sum
+2  *2    0182  loop:  	    ld tab_sum
 3  *3    6000  			addr 0
-4  *4    1094  			st tab_sum
+4  *4    1182  			st tab_sum
 5  *5    F601  			dloc 1
-6  *6    0097  			ld tab_count
-7  *7    3098  			sub one
-8  *8    1097  			st tab_count
+6  *6    0185  			ld tab_count
+7  *7    3186  			sub one
+8  *8    1185  			st tab_count
 9  *9    D002  			jnz loop
-A  *10   808D  			ldc message
+               		
+A  *10   817B  			ldc message
 B  *11   FFF7  			sout
-C  *12   0094  			ld tab_sum
+C  *12   0182  			ld tab_sum
 D  *13   FFFD  			dout
-E  *14   800A  			ldc '\n'
-F  *15   FFFB  			aout
-               		
-10 *16   0094  			ld tab_sum
-11 *17   1099  			st mul_numb
-12 *18   009A  			ld six_cons
-13 *19   109C  			st mul_count
-14 *20   E05D  			call multi
-               		
-15 *21   800A  			ldc '\n'
-16 *22   FFFB  			aout
-17 *23   009D  			ld mul_answer
-18 *24   10A1  			st e1
-19 *25   FFFD  			dout
-               
-1A *26   00A1  			ld e1
-1B *27   109E  			st div_numb1
-1C *28   009B  			ld five_const
-1D *29   109F  			st div_numb2
-1E *30   800A  			ldc '\n'
-1F *31   FFFB  			aout
-20 *32   E065  			call div_mod
+E  *14   0190  			ld zero
+F  *15   118B  			st mul_answer
+10 *16   118E  			st div_answer
+11 *17   0195  			ld n1
+12 *18   1193  			st tab1_n
                			
-21 *33   00A0      		ld div_answer
-22 *34   10A3  			st tab1_e1
-23 *35   FFFD  			dout
+13 *19   E0CE  			call calcu
                			
-24 *36   800A  			ldc '\n'
-25 *37   FFFB  			aout
-26 *38   00A5  			ld tab1_n1
-27 *39   30A0  			sub div_answer
-28 *40   10A5  			st tab1_n1
+14 *20   019F  			ld Fi_D
+15 *21   119A  			st c1
+               			
+16 *22   0190  			ld zero
+17 *23   1182  			st tab_sum
+18 *24   0188  			ld six_cons
+19 *25   1185  			st tab_count
+1A *26   800A  			ldc '\n'
+1B *27   FFFB  			aout
+               			
+               			
+1C *28   81A8  			ldc table2
+1D *29   F700  			swap
+1E *30   0182  loop1:      ld tab_sum
+1F *31   6000  			addr 0
+20 *32   1182  			st tab_sum
+21 *33   F601  			dloc 1
+22 *34   0185  			ld tab_count
+23 *35   3186  			sub one
+24 *36   1185  			st tab_count
+25 *37   D01E  			jnz loop1
+26 *38   817B  			ldc message
+27 *39   FFF7  			sout
+28 *40   0182  			ld tab_sum
 29 *41   FFFD  			dout
+2A *42   0190  			ld zero
+2B *43   118B  			st mul_answer
+2C *44   118E  			st div_answer
                			
-2A *42   00A5  			ld tab1_n1
-2B *43   1099  			st mul_numb
-2C *44   109C  			st mul_count
-               			
-2D *45   00A2  			ld zero
-2E *46   109D  			st mul_answer
-               			
-2F *47   E05D  			call multi
-               			
-30 *48   800A  			ldc '\n'
-31 *49   FFFB  			aout
-32 *50   009D  			ld mul_answer
-33 *51   FFFD  			dout
-               			
-34 *52   00A2  			ld zero
-35 *53   10A0  			st div_answer
-36 *54   009D  			ld mul_answer
-37 *55   109E  			st div_numb1
-38 *56   00A3  			ld tab1_e1
-39 *57   109F  			st div_numb2
-3A *58   E065  			call div_mod
-               			
-3B *59   800A  			ldc '\n'
-3C *60   FFFB  			aout
-3D *61   00A0  			ld div_answer
-3E *62   1095  			st quot_answer
-3F *63   009E  			ld div_numb1
-40 *64   00A2  			ld zero
-41 *65   109D  			st mul_answer
-42 *66   009E  			ld div_numb1
-43 *67   1099  			st mul_numb
-44 *68   00A4  			ld ten
-45 *69   109C  			st mul_count
-               			
-46 *70   E05D  			call multi
-               			
-47 *71   800A  			ldc '\n'
-48 *72   FFFB  			aout
-49 *73   009D  			ld mul_answer
-4A *74   109E  			st div_numb1
-4B *75   00A3  			ld tab1_e1
-4C *76   109F  			st div_numb2
-4D *77   00A2  			ld zero
-4E *78   10A0  			st div_answer
-4F *79   E065  			call div_mod
-               			
-50 *80   800A  			ldc '\n'
-51 *81   FFFB  			aout
-52 *82   00A0  			ld div_answer
-53 *83   1096  			st rem_answer
-               			
-54 *84   806E  			ldc message2
-55 *85   FFF7  			sout
-56 *86   0095  			ld quot_answer
-57 *87   FFFD  			dout
-58 *88   802E  			ldc '.'
-59 *89   FFFB  			aout
-5A *90   0096  			ld rem_answer
-5B *91   FFFD  			dout
+2D *45   0196  			ld n2
+2E *46   1193  			st tab1_n
+               
+2F *47   E0CE  			call calcu
+               
+30 *48   019F  			ld Fi_D
+31 *49   119B  			st c2
                			
                			
-5C *92   FFFF  			halt
                			
-5D *93   0099  multi:		ld mul_numb
-5E *94   209D  			add mul_answer
-5F *95   109D  			st mul_answer
-60 *96   009C  			ld mul_count
-61 *97   3098  			sub one
-62 *98   109C  			st mul_count
-63 *99   C06D  			jz next
-64 *100  905D  			ja multi
-               		
-               		
-65 *101  009E  div_mod: 	ld div_numb1
-66 *102  309F  			sub div_numb2
-67 *103  B06D  			jn next
-68 *104  109E  			st div_numb1
-69 *105  00A0  			ld div_answer
-6A *106  2098  			add one
-6B *107  10A0  			st div_answer
-6C *108  9065  			ja div_mod
-               		
-               		
-               		
-               		
-6D *109  F000  next : ret		
-               		
-               		
-               		
-               		
-               		
-               		
-6E *110  0050  message2:  dw "Percentage of category 1 is = "		
-6F *111  0065
-70 *112  0072
-71 *113  0063
-72 *114  0065
-73 *115  006E
-74 *116  0074
-75 *117  0061
-76 *118  0067
-77 *119  0065
-78 *120  0020
-79 *121  006F
-7A *122  0066
-7B *123  0020
-7C *124  0063
-7D *125  0061
-7E *126  0074
-7F *127  0065
-80 *128  0067
-81 *129  006F
-82 *130  0072
-83 *131  0079
-84 *132  0020
-85 *133  0031
-86 *134  0020
-87 *135  0069
-88 *136  0073
-89 *137  0020
-8A *138  003D
-8B *139  0020
-8C *140  0000
-8D *141  0073  message: 	dw "sum = "
-8E *142  0075
-8F *143  006D
-90 *144  0020
-91 *145  003D
-92 *146  0020
-93 *147  0000
-94 *148  0000  tab_sum:	dw 0
-95 *149  0000  quot_answer:dw 0
-96 *150  0000  rem_answer: dw 0
-97 *151  0006  tab_count:  dw 6
-98 *152  0001  one:	    dw 1
-99 *153  0000  mul_numb:   dw 0
-9A *154  0006  six_cons:   dw 6
-9B *155  0005  five_const: dw 5
-9C *156  0000  mul_count:  dw 0
-9D *157  0000  mul_answer: dw 0
-9E *158  0000  div_numb1:  dw 0
-9F *159  0000  div_numb2:  dw 0
-A0 *160  0000  div_answer: dw 0
-A1 *161  0000  e1:		    dw 0
-A2 *162  0000  zero:		dw 0
-A3 *163  0000  tab1_e1:	dw 0
-A4 *164  000A  ten:		dw 10
-A5 *165  0157  tab1_n1:	dw 343
+32 *50   0190  			ld zero
+33 *51   1182  			st tab_sum
+34 *52   0188  			ld six_cons
+35 *53   1185  			st tab_count
+36 *54   800A  			ldc '\n'
+37 *55   FFFB  			aout
+               			
+               			
+38 *56   81AE  			ldc table3
+39 *57   F700  			swap
+3A *58   0182  loop2:      ld tab_sum
+3B *59   6000  			addr 0
+3C *60   1182  			st tab_sum
+3D *61   F601  			dloc 1
+3E *62   0185  			ld tab_count
+3F *63   3186  			sub one
+40 *64   1185  			st tab_count
+41 *65   D03A  			jnz loop2
+42 *66   817B  			ldc message
+43 *67   FFF7  			sout
+44 *68   0182  		    ld tab_sum
+45 *69   FFFD  			dout
+46 *70   0190  			ld zero
+47 *71   118B  			st mul_answer
+48 *72   118E  			st div_answer
+               			
+49 *73   0197  			ld n3
+4A *74   1193  			st tab1_n
+               
+4B *75   E0CE  			call calcu
+               	
+4C *76   019F  			ld Fi_D
+4D *77   119C  			st c3
+               			
+4E *78   0190  			ld zero
+4F *79   1182  			st tab_sum
+50 *80   0188  			ld six_cons
+51 *81   1185  			st tab_count
+52 *82   800A  			ldc '\n'
+53 *83   FFFB  			aout
+               			
+               			
+54 *84   81B4  			ldc table4
+55 *85   F700  			swap
+56 *86   0182  loop3: 	    ld tab_sum
+57 *87   6000  			addr 0
+58 *88   1182  			st tab_sum
+59 *89   F601  			dloc 1
+5A *90   0185  			ld tab_count
+5B *91   3186  			sub one
+5C *92   1185  			st tab_count
+5D *93   D056  			jnz loop3
+5E *94   817B  			ldc message
+5F *95   FFF7  			sout
+60 *96   0182  			ld tab_sum
+61 *97   FFFD  			dout
+62 *98   0190  			ld zero
+63 *99   118B  			st mul_answer
+64 *100  118E  			st div_answer
+               			
+65 *101  0198  			ld n4
+66 *102  1193  			st tab1_n
+               
+               
+67 *103  E0CE  			call calcu
+               
+68 *104  019F  			ld Fi_D
+69 *105  119D  			st c4
+               			
+               			
+6A *106  0190  			ld zero
+6B *107  1182  			st tab_sum
+6C *108  0188  			ld six_cons
+6D *109  1185  			st tab_count
+6E *110  800A  			ldc '\n'
+6F *111  FFFB  			aout
+               			
+               			
+               			
+70 *112  81BA  			ldc table5
+71 *113  F700  			swap
+72 *114  0182  loop4:      ld tab_sum
+73 *115  6000  			addr 0
+74 *116  1182  			st tab_sum
+75 *117  F601  			dloc 1
+76 *118  0185  			ld tab_count
+77 *119  3186  			sub one
+78 *120  1185  			st tab_count
+79 *121  D072  			jnz loop4
+7A *122  817B  			ldc message
+7B *123  FFF7  			sout
+7C *124  0182  			ld tab_sum
+7D *125  FFFD  			dout
+7E *126  0190  			ld zero
+7F *127  118B  			st mul_answer
+80 *128  118E  			st div_answer
+               			
+81 *129  0199  			ld n5
+82 *130  1193  			st tab1_n
+               
+83 *131  E0CE  			call calcu
+               			
+84 *132  019F  			ld Fi_D
+85 *133  119E  			st c5
+               			
+               
+86 *134  0190  			ld zero
+87 *135  1182  			st tab_sum
+88 *136  0188  			ld six_cons
+89 *137  1185  			st tab_count
+8A *138  800A  			ldc '\n'
+8B *139  FFFB  			aout
+               			
+8C *140  0190  			ld zero
+8D *141  118E  			st div_answer
+8E *142  118B  			st mul_answer
+               			
+8F *143  0190  			ld zero
+90 *144  119F  			st Fi_D
+91 *145  019F  			ld Fi_D
+92 *146  219A  			add c1
+93 *147  119F  			st Fi_D
+94 *148  219B  			add c2
+95 *149  119F  			st Fi_D
+96 *150  219C  			add c3
+97 *151  119F  			st Fi_D
+98 *152  219D  			add c4
+99 *153  119F  			st Fi_D
+9A *154  219E  			add c5
+9B *155  119F  			st Fi_D
+               			
+9C *156  800A  			ldc '\n'
+9D *157  FFFB  			aout
+9E *158  019F  			ld Fi_D
+9F *159  118C  			st div_numb1
+A0 *160  0192  			ld ten
+A1 *161  118D  			st div_numb2
+               			
+A2 *162  E12C  			call div_mod
+               			
+A3 *163  018E  			ld div_answer
+A4 *164  11A0  			st Fi_E
+               
+               			
+A5 *165  018C  			ld div_numb1
+A6 *166  1187  			st mul_numb
+A7 *167  0192  			ld ten
+A8 *168  118A  			st mul_count
+               			
+A9 *169  E124  			call multi
+               
+AA *170  800A  			ldc '\n'
+AB *171  FFFB  			aout			
+AC *172  0190  			ld zero
+AD *173  118E  			st div_answer
+AE *174  018B  			ld mul_answer
+AF *175  118C  			st div_numb1
+B0 *176  0192  			ld ten
+B1 *177  118D  			st div_numb2
+               			
+B2 *178  E12C  			call div_mod
+               			
+B3 *179  018E  			ld div_answer
+B4 *180  11A1  			st Fi_F
+               			
+B5 *181  802D  br_loop:	ldc '-'
+B6 *182  FFFB  			aout
+B7 *183  0136  			ld br_const
+B8 *184  3186  			sub one
+B9 *185  1136  			st br_const
+BA *186  D0B5  			jnz br_loop
+               			
+BB *187  800A  			ldc '\n'
+BC *188  FFFB  			aout
+BD *189  8137  			ldc message3
+BE *190  FFF7  			sout
+BF *191  01A0  			ld Fi_E
+C0 *192  FFFD  			dout
+C1 *193  802E  			ldc '.'
+C2 *194  FFFB  			aout
+C3 *195  01A1  			ld Fi_F
+C4 *196  FFFD  			dout
+C5 *197  800A  			ldc '\n'
+C6 *198  FFFB  			aout
+               
+C7 *199  802D  br_loop1:	ldc '-'
+C8 *200  FFFB  			aout
+C9 *201  0135  			ld br_const1
+CA *202  3186  			sub one
+CB *203  1135  			st br_const1
+CC *204  D0C7  			jnz br_loop1
+CD *205  FFFF  			halt
                
                
                
-A6 *166  007E  table1: 	dw 126
-A7 *167  0046  			dw 70
-A8 *168  0028  			dw 40
-A9 *169  0015  			dw 21
-AA *170  000A  			dw 10
-AB *171  0001  			dw 1
-AC *172  ========= end of assignment-3.mas =======================
+CE *206  0182  calcu:		ld tab_sum
+CF *207  1187  			st mul_numb
+D0 *208  0188  			ld six_cons
+D1 *209  118A  			st mul_count
+               			
+D2 *210  E124  			call multi
+               			
+D3 *211  800A  			ldc '\n'
+D4 *212  FFFB  			aout
+D5 *213  018B  			ld mul_answer
+D6 *214  118F  			st e1
+D7 *215  FFFD  			dout
+               		
+D8 *216  800A  			ldc '\n'
+D9 *217  FFFB  			aout
+DA *218  018F  			ld e1
+DB *219  118C  			st div_numb1
+DC *220  0189  			ld five_const
+DD *221  118D  			st div_numb2
+               			
+DE *222  E12C  			call div_mod
+               			
+DF *223  018E      		ld div_answer
+E0 *224  1191  			st tab1_e1
+E1 *225  FFFD  			dout
+               			
+E2 *226  800A  			ldc '\n'
+E3 *227  FFFB  			aout
+               			
+E4 *228  018E  			ld div_answer
+E5 *229  1191  			st tab1_e1
+E6 *230  0191  			ld tab1_e1
+E7 *231  3193  			sub tab1_n
+E8 *232  FFFD  			dout
+               			
+E9 *233  1193  			st tab1_n
+EA *234  0193  			ld tab1_n
+EB *235  1187  			st mul_numb
+EC *236  118A  			st mul_count
+ED *237  0190  			ld zero
+EE *238  118B  			st mul_answer
+               			
+EF *239  E124  			call multi
+               			
+F0 *240  0190  			ld zero
+F1 *241  118E  			st div_answer
+F2 *242  018B  			ld mul_answer
+F3 *243  118C  			st div_numb1
+F4 *244  0191  			ld tab1_e1
+F5 *245  118D  			st div_numb2
+               			
+F6 *246  E12C  			call div_mod
+               			
+F7 *247  018E  			ld div_answer
+F8 *248  1183  			st quot_answer
+F9 *249  018C  			ld div_numb1
+FA *250  0190  			ld zero
+FB *251  118B  			st mul_answer
+FC *252  018C  			ld div_numb1
+FD *253  1187  			st mul_numb
+FE *254  0192  			ld ten
+FF *255  118A  			st mul_count
+               			
+100*256  E124  			call multi
+               			
+101*257  018B  			ld mul_answer
+102*258  118C  			st div_numb1
+103*259  0191  			ld tab1_e1
+104*260  118D  			st div_numb2
+105*261  0190  			ld zero
+106*262  118E  			st div_answer
+               		
+               			
+107*263  E12C  			call div_mod
+               			
+108*264  800A  			ldc '\n'
+109*265  FFFB  			aout
+10A*266  018E  			ld div_answer
+10B*267  1184  			st rem_answer
+10C*268  814F  			ldc message2
+10D*269  FFF7  			sout
+10E*270  0183  			ld quot_answer
+10F*271  FFFD  			dout
+110*272  802E  			ldc '.'
+111*273  FFFB  			aout
+112*274  0184  			ld rem_answer
+113*275  FFFD  			dout
+               			
+114*276  800A  			ldc '\n'
+115*277  FFFB  			aout
+116*278  0190  			ld zero
+117*279  118B  			st mul_answer
+               			
+118*280  0183  			ld quot_answer
+119*281  1187  			st mul_numb
+11A*282  0192  			ld ten
+11B*283  118A  			st mul_count
+               			
+11C*284  E124  			call multi
+               			
+11D*285  018B  			ld mul_answer
+11E*286  119F  			st Fi_D
+11F*287  2184  			add rem_answer
+120*288  119F  			st Fi_D
+               			
+121*289  800A  			ldc '\n'
+122*290  FFFB  			aout
+               			
+123*291  F000  			ret
+               
+               
+               
+               
+               
+124*292  0187  multi:		ld mul_numb
+125*293  218B  			add mul_answer
+126*294  118B  			st mul_answer
+127*295  018A  			ld mul_count
+128*296  3186  			sub one
+129*297  118A  			st mul_count
+12A*298  C134  			jz next
+12B*299  9124  			ja multi
+               		
+               		
+12C*300  018C  div_mod: 	ld div_numb1
+12D*301  318D  			sub div_numb2
+12E*302  B134  			jn next
+12F*303  118C  			st div_numb1
+130*304  018E  			ld div_answer
+131*305  2186  			add one
+132*306  118E  			st div_answer
+133*307  912C  			ja div_mod
+               		
+               		
+               		
+               		
+134*308  F000  next : ret		
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+               
+135*309  001B  br_const1:	dw 27
+136*310  001B  br_const:	dw 27
+137*311  0043  message3:   dw "Chi Squared value is = "
+138*312  0068
+139*313  0069
+13A*314  0020
+13B*315  0053
+13C*316  0071
+13D*317  0075
+13E*318  0061
+13F*319  0072
+140*320  0065
+141*321  0064
+142*322  0020
+143*323  0076
+144*324  0061
+145*325  006C
+146*326  0075
+147*327  0065
+148*328  0020
+149*329  0069
+14A*330  0073
+14B*331  0020
+14C*332  003D
+14D*333  0020
+14E*334  0000
+14F*335  0054  message2:   dw "The Value for {(n_i - e_i)^2 / (e_i)} is = "		
+150*336  0068
+151*337  0065
+152*338  0020
+153*339  0056
+154*340  0061
+155*341  006C
+156*342  0075
+157*343  0065
+158*344  0020
+159*345  0066
+15A*346  006F
+15B*347  0072
+15C*348  0020
+15D*349  007B
+15E*350  0028
+15F*351  006E
+160*352  005F
+161*353  0069
+162*354  0020
+163*355  002D
+164*356  0020
+165*357  0065
+166*358  005F
+167*359  0069
+168*360  0029
+169*361  005E
+16A*362  0032
+16B*363  0020
+16C*364  002F
+16D*365  0020
+16E*366  0028
+16F*367  0065
+170*368  005F
+171*369  0069
+172*370  0029
+173*371  007D
+174*372  0020
+175*373  0069
+176*374  0073
+177*375  0020
+178*376  003D
+179*377  0020
+17A*378  0000
+17B*379  0073  message: 	dw "sum = "
+17C*380  0075
+17D*381  006D
+17E*382  0020
+17F*383  003D
+180*384  0020
+181*385  0000
+182*386  0000  tab_sum:	dw 0
+183*387  0000  quot_answer:dw 0
+184*388  0000  rem_answer: dw 0
+185*389  0006  tab_count:  dw 6
+186*390  0001  one:	    dw 1
+187*391  0000  mul_numb:   dw 0
+188*392  0006  six_cons:   dw 6
+189*393  0005  five_const: dw 5
+18A*394  0000  mul_count:  dw 0
+18B*395  0000  mul_answer: dw 0
+18C*396  0000  div_numb1:  dw 0
+18D*397  0000  div_numb2:  dw 0
+18E*398  0000  div_answer: dw 0
+18F*399  0000  e1:		    dw 0
+190*400  0000  zero:		dw 0
+191*401  0000  tab1_e1:	dw 0
+192*402  000A  ten:		dw 10
+193*403  0000  tab1_n:	    dw 0
+194*404  0000  fi_answer:  dw 0
+195*405  0115  n1:		    dw 277
+196*406  00D2  n2:			dw 210
+197*407  00C1  n3:			dw 193
+198*408  00BF  n4:			dw 191
+199*409  0093  n5:			dw 147
+               
+19A*410  0000  c1:			dw 0
+19B*411  0000  c2:			dw 0
+19C*412  0000  c3:			dw 0
+19D*413  0000  c4:			dw 0
+19E*414  0000  c5:			dw 0
+               
+19F*415  0000  Fi_D:		dw 0
+               
+1A0*416  0000  Fi_E:		dw 0
+1A1*417  0000  Fi_F:		dw 0
+               
+               
+1A2*418  007E  table1: 	dw 126		
+1A3*419  0046  			dw 70		
+1A4*420  0028  			dw 40		
+1A5*421  0015  			dw 21		
+1A6*422  000A  			dw 10		
+1A7*423  0001  			dw 1
+               
+1A8*424  005C  table2: 	dw 92
+1A9*425  0041  			dw 65		
+1AA*426  001C  			dw 28		
+1AB*427  0014  			dw 20		
+1AC*428  0007  			dw 7		
+1AD*429  0000  			dw 0
+               			
+1AE*430  0050  table3: 	dw 80		
+1AF*431  003D  			dw 61		
+1B0*432  001B  			dw 27		
+1B1*433  0012  			dw 18		
+1B2*434  0002  			dw 2		
+1B3*435  0000  			dw 0
+               			
+1B4*436  004C  table4: 	dw 76		
+1B5*437  003D  			dw 61		
+1B6*438  0019  			dw 25		
+1B7*439  0012  			dw 18		
+1B8*440  0001  			dw 1		
+1B9*441  0000  			dw 0
+               			
+1BA*442  0046  table5: 	dw 70		
+1BB*443  0029  			dw 41		
+1BC*444  0018  			dw 24		
+1BD*445  000F  			dw 15		
+1BE*446  0001  			dw 1
+1BF*447  0000  			dw 0			
+1C0*448  ========= end of assignment-3.mas =======================
 
 
          Symbol/Cross-Reference Table
@@ -217,33 +567,84 @@ Symbol                   Address     References
                           (hex)       (hex)
 
  loop                      2           9  
- multi                     5D          14  2F  46  64 
- div_mod                   65          20  3A  4F  6C 
- next                      6D          63  67 
- message2                  6E          54 
- message                   8D          A  
- tab_sum                   94          2   4   C   10 
- quot_answer               95          3E  56 
- rem_answer                96          53  5A 
- tab_count                 97          6   8  
- one                       98          7   61  6A 
- mul_numb                  99          11  2B  43  5D 
- six_cons                  9A          12 
- five_const                9B          1C 
- mul_count                 9C          13  2C  45  60  62 
- mul_answer                9D          17  2E  32  36  41 
-                                       49  5E  5F 
- div_numb1                 9E          1B  37  3F  42  4A 
-                                       65  68 
- div_numb2                 9F          1D  39  4C  66 
- div_answer                A0          21  27  35  3D  4E 
-                                       52  69  6B 
- e1                        A1          18  1A 
- zero                      A2          2D  34  40  4D 
- tab1_e1                   A3          22  38  4B 
- ten                       A4          44 
- tab1_n1                   A5          26  28  2A 
- table1                    A6          0  
+ loop1                     1E          25 
+ loop2                     3A          41 
+ loop3                     56          5D 
+ loop4                     72          79 
+ br_loop                   B5          BA 
+ br_loop1                  C7          CC 
+ calcu                     CE          13  2F  4B  67  83 
+ multi                     124         A9  D2  EF  100 11C
+                                       12B
+ div_mod                   12C         A2  B2  DE  F6  107
+                                       133
+ next                      134         12A 12E
+ br_const1                 135         C9  CB 
+ br_const                  136         B7  B9 
+ message3                  137         BD 
+ message2                  14F         10C
+ message                   17B         A   26  42  5E  7A 
+ tab_sum                   182         2   4   C   17  1E 
+                                       20  28  33  3A  3C 
+                                       44  4F  56  58  60 
+                                       6B  72  74  7C  87 
+                                       CE 
+ quot_answer               183         F8  10E 118
+ rem_answer                184         10B 112 11F
+ tab_count                 185         6   8   19  22  24 
+                                       35  3E  40  51  5A 
+                                       5C  6D  76  78  89 
+ one                       186         7   23  3F  5B  77 
+                                       B8  CA  128 131
+ mul_numb                  187         A6  CF  EB  FD  119
+                                       124
+ six_cons                  188         18  34  50  6C  88 
+                                       D0 
+ five_const                189         DC 
+ mul_count                 18A         A8  D1  EC  FF  11B
+                                       127 129
+ mul_answer                18B         F   2B  47  63  7F 
+                                       8E  AE  D5  EE  F2 
+                                       FB  101 117 11D 125
+                                       126
+ div_numb1                 18C         9F  A5  AF  DB  F3 
+                                       F9  FC  102 12C 12F
+ div_numb2                 18D         A1  B1  DD  F5  104
+                                       12D
+ div_answer                18E         10  2C  48  64  80 
+                                       8D  A3  AD  B3  DF 
+                                       E4  F1  F7  106 10A
+                                       130 132
+ e1                        18F         D6  DA 
+ zero                      190         E   16  2A  32  46 
+                                       4E  62  6A  7E  86 
+                                       8C  8F  AC  ED  F0 
+                                       FA  105 116
+ tab1_e1                   191         E0  E5  E6  F4  103
+ ten                       192         A0  A7  B0  FE  11A
+ tab1_n                    193         12  2E  4A  66  82 
+                                       E7  E9  EA 
+ fi_answer                 194        
+ n1                        195         11 
+ n2                        196         2D 
+ n3                        197         49 
+ n4                        198         65 
+ n5                        199         81 
+ c1                        19A         15  92 
+ c2                        19B         31  94 
+ c3                        19C         4D  96 
+ c4                        19D         69  98 
+ c5                        19E         85  9A 
+ Fi_D                      19F         14  30  4C  68  84 
+                                       90  91  93  95  97 
+                                       99  9B  9E  11E 120
+ Fi_E                      1A0         A4  BF 
+ Fi_F                      1A1         B4  C3 
+ table1                    1A2         0  
+ table2                    1A8         1C 
+ table3                    1AE         38 
+ table4                    1B4         54 
+ table5                    1BA         70 
 
 Input file   = assignment-3.mas
 Output file  = assignment-3.mac

@@ -1,19 +1,54 @@
 sim Version 6.3 Log File assignment-3.log
 
 Your name          = Run mod sim /r to put your name here
-Machinecode file   = assignment-3.mac Size =  AC (hex) =  172 (dec)
+Machinecode file   = assignment-3.mac Size = 1C0 (hex) =  448 (dec)
 Microcode file     = none         Size =  93 (hex) =  147 (dec)
-======================== Log turned on  Mon Nov 05 08:04:41 2018
+======================== Log turned on  Thu Nov 08 09:57:39 2018
 ======================== Starting session ======================
----- [T7] 0: ldc  /8 0A6/ n
+---- [T7] 0: ldc  /8 1A2/ n
 No display mode
 ---- [T7] g
 sum = 268
-
 1608
 321
-22
-484
+44
+The Value for {(n_i - e_i)^2 / (e_i)} is = 6.0
 
 
-Percentage of category 1 is = 1.5
+sum = 212
+1272
+254
+44
+The Value for {(n_i - e_i)^2 / (e_i)} is = 7.6
+
+
+sum = 188
+1128
+225
+32
+The Value for {(n_i - e_i)^2 / (e_i)} is = 4.5
+
+
+sum = 181
+1086
+217
+26
+The Value for {(n_i - e_i)^2 / (e_i)} is = 3.1
+
+
+sum = 151
+906
+181
+34
+The Value for {(n_i - e_i)^2 / (e_i)} is = 6.3
+
+
+
+
+---------------------------
+Chi Squared value is = 27.5
+---------------------------
+Machine inst count =  3678 (hex) =  13944 (dec)
+Micro   inst count = 2123C (hex) = 135740 (dec)
+---- [T7] q
+================== sim(6e82) terminated Thu Nov 08 09:57:49 2018

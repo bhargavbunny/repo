@@ -1,6 +1,6 @@
 			ldc table1
 			swap
-loop:   	ld tab_sum
+loop:  	    ld tab_sum
 			addr 0
 			st tab_sum
 			dloc 1
@@ -8,31 +8,273 @@ loop:   	ld tab_sum
 			sub one
 			st tab_count
 			jnz loop
+		
 			ldc message
 			sout
 			ld tab_sum
 			dout
+			ld zero
+			st mul_answer
+			st div_answer
+			ld n1
+			st tab1_n
+			
+			call calcu
+			
+			ld Fi_D
+			st c1
+			
+			ld zero
+			st tab_sum
+			ld six_cons
+			st tab_count
 			ldc '\n'
 			aout
-		
+			
+			
+			ldc table2
+			swap
+loop1:      ld tab_sum
+			addr 0
+			st tab_sum
+			dloc 1
+			ld tab_count
+			sub one
+			st tab_count
+			jnz loop1
+			ldc message
+			sout
 			ld tab_sum
+			dout
+			ld zero
+			st mul_answer
+			st div_answer
+			
+			ld n2
+			st tab1_n
+
+			call calcu
+
+			ld Fi_D
+			st c2
+			
+			
+			
+			ld zero
+			st tab_sum
+			ld six_cons
+			st tab_count
+			ldc '\n'
+			aout
+			
+			
+			ldc table3
+			swap
+loop2:      ld tab_sum
+			addr 0
+			st tab_sum
+			dloc 1
+			ld tab_count
+			sub one
+			st tab_count
+			jnz loop2
+			ldc message
+			sout
+		    ld tab_sum
+			dout
+			ld zero
+			st mul_answer
+			st div_answer
+			
+			ld n3
+			st tab1_n
+
+			call calcu
+	
+			ld Fi_D
+			st c3
+			
+			ld zero
+			st tab_sum
+			ld six_cons
+			st tab_count
+			ldc '\n'
+			aout
+			
+			
+			ldc table4
+			swap
+loop3: 	    ld tab_sum
+			addr 0
+			st tab_sum
+			dloc 1
+			ld tab_count
+			sub one
+			st tab_count
+			jnz loop3
+			ldc message
+			sout
+			ld tab_sum
+			dout
+			ld zero
+			st mul_answer
+			st div_answer
+			
+			ld n4
+			st tab1_n
+
+
+			call calcu
+
+			ld Fi_D
+			st c4
+			
+			
+			ld zero
+			st tab_sum
+			ld six_cons
+			st tab_count
+			ldc '\n'
+			aout
+			
+			
+			
+			ldc table5
+			swap
+loop4:      ld tab_sum
+			addr 0
+			st tab_sum
+			dloc 1
+			ld tab_count
+			sub one
+			st tab_count
+			jnz loop4
+			ldc message
+			sout
+			ld tab_sum
+			dout
+			ld zero
+			st mul_answer
+			st div_answer
+			
+			ld n5
+			st tab1_n
+
+			call calcu
+			
+			ld Fi_D
+			st c5
+			
+
+			ld zero
+			st tab_sum
+			ld six_cons
+			st tab_count
+			ldc '\n'
+			aout
+			
+			ld zero
+			st div_answer
+			st mul_answer
+			
+			ld zero
+			st Fi_D
+			ld Fi_D
+			add c1
+			st Fi_D
+			add c2
+			st Fi_D
+			add c3
+			st Fi_D
+			add c4
+			st Fi_D
+			add c5
+			st Fi_D
+			
+			ldc '\n'
+			aout
+			ld Fi_D
+			st div_numb1
+			ld ten
+			st div_numb2
+			
+			call div_mod
+			
+			ld div_answer
+			st Fi_E
+
+			
+			ld div_numb1
+			st mul_numb
+			ld ten
+			st mul_count
+			
+			call multi
+
+			ldc '\n'
+			aout			
+			ld zero
+			st div_answer
+			ld mul_answer
+			st div_numb1
+			ld ten
+			st div_numb2
+			
+			call div_mod
+			
+			ld div_answer
+			st Fi_F
+			
+br_loop:	ldc '-'
+			aout
+			ld br_const
+			sub one
+			st br_const
+			jnz br_loop
+			
+			ldc '\n'
+			aout
+			ldc message3
+			sout
+			ld Fi_E
+			dout
+			ldc '.'
+			aout
+			ld Fi_F
+			dout
+			ldc '\n'
+			aout
+
+br_loop1:	ldc '-'
+			aout
+			ld br_const1
+			sub one
+			st br_const1
+			jnz br_loop1
+			halt
+
+
+
+calcu:		ld tab_sum
 			st mul_numb
 			ld six_cons
 			st mul_count
+			
 			call multi
-		
+			
 			ldc '\n'
 			aout
 			ld mul_answer
 			st e1
 			dout
-
+		
+			ldc '\n'
+			aout
 			ld e1
 			st div_numb1
 			ld five_const
 			st div_numb2
-			ldc '\n'
-			aout
+			
 			call div_mod
 			
     		ld div_answer
@@ -41,24 +283,21 @@ loop:   	ld tab_sum
 			
 			ldc '\n'
 			aout
-			ld tab1_n1
-			sub div_answer
-			st tab1_n1
+			
+			ld div_answer
+			st tab1_e1
+			ld tab1_e1
+			sub tab1_n
 			dout
 			
-			ld tab1_n1
+			st tab1_n
+			ld tab1_n
 			st mul_numb
 			st mul_count
-			
 			ld zero
 			st mul_answer
 			
 			call multi
-			
-			ldc '\n'
-			aout
-			ld mul_answer
-			dout
 			
 			ld zero
 			st div_answer
@@ -66,10 +305,9 @@ loop:   	ld tab_sum
 			st div_numb1
 			ld tab1_e1
 			st div_numb2
+			
 			call div_mod
 			
-			ldc '\n'
-			aout
 			ld div_answer
 			st quot_answer
 			ld div_numb1
@@ -82,21 +320,20 @@ loop:   	ld tab_sum
 			
 			call multi
 			
-			ldc '\n'
-			aout
 			ld mul_answer
 			st div_numb1
 			ld tab1_e1
 			st div_numb2
 			ld zero
 			st div_answer
+		
+			
 			call div_mod
 			
 			ldc '\n'
 			aout
 			ld div_answer
 			st rem_answer
-			
 			ldc message2
 			sout
 			ld quot_answer
@@ -106,9 +343,32 @@ loop:   	ld tab_sum
 			ld rem_answer
 			dout
 			
+			ldc '\n'
+			aout
+			ld zero
+			st mul_answer
 			
-			halt
+			ld quot_answer
+			st mul_numb
+			ld ten
+			st mul_count
 			
+			call multi
+			
+			ld mul_answer
+			st Fi_D
+			add rem_answer
+			st Fi_D
+			
+			ldc '\n'
+			aout
+			
+			ret
+
+
+
+
+
 multi:		ld mul_numb
 			add mul_answer
 			st mul_answer
@@ -132,13 +392,23 @@ div_mod: 	ld div_numb1
 		
 		
 next : ret		
-		
-		
-		
-		
-		
-		
-message2:  dw "Percentage of category 1 is = "		
+
+
+
+
+
+
+
+
+
+
+
+
+
+br_const1:	dw 27
+br_const:	dw 27
+message3:   dw "Chi Squared value is = "
+message2:   dw "The Value for {(n_i - e_i)^2 / (e_i)} is = "		
 message: 	dw "sum = "
 tab_sum:	dw 0
 quot_answer:dw 0
@@ -157,13 +427,57 @@ e1:		    dw 0
 zero:		dw 0
 tab1_e1:	dw 0
 ten:		dw 10
-tab1_n1:	dw 343
+tab1_n:	    dw 0
+fi_answer:  dw 0
+n1:		    dw 277
+n2:			dw 210
+n3:			dw 193
+n4:			dw 191
+n5:			dw 147
+
+c1:			dw 0
+c2:			dw 0
+c3:			dw 0
+c4:			dw 0
+c5:			dw 0
+
+Fi_D:		dw 0
+
+Fi_E:		dw 0
+Fi_F:		dw 0
 
 
-
-table1: 	dw 126
-			dw 70
-			dw 40
-			dw 21
-			dw 10
+table1: 	dw 126		
+			dw 70		
+			dw 40		
+			dw 21		
+			dw 10		
 			dw 1
+
+table2: 	dw 92
+			dw 65		
+			dw 28		
+			dw 20		
+			dw 7		
+			dw 0
+			
+table3: 	dw 80		
+			dw 61		
+			dw 27		
+			dw 18		
+			dw 2		
+			dw 0
+			
+table4: 	dw 76		
+			dw 61		
+			dw 25		
+			dw 18		
+			dw 1		
+			dw 0
+			
+table5: 	dw 70		
+			dw 41		
+			dw 24		
+			dw 15		
+			dw 1
+			dw 0			
