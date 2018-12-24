@@ -1,0 +1,22 @@
+!s1
+
+loop:	ldc	msg1
+		sout
+		ain
+		sub n
+		jz exit
+		ldc msg2
+		sout
+		hin
+		push
+		hin
+		push
+		STACKor
+		pop
+		hout
+		ja loop
+exit:	halt
+msg1: 	dw "do you to perform stack or y/n"
+msg2:	dw "enter two hexadecimal number = "
+n:		dw 'n'
+		

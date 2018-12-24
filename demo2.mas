@@ -1,0 +1,535 @@
+
+end2:
+	ldc enterString		; input string as number
+	sout
+	ldc xin
+	push				; push them to stack
+	sin
+	ldc enterString2
+	sout
+	ldc yin
+	push
+	sin
+init:
+	ldc inbufx
+	st inbufxp
+	ldc inbufy
+	st inbufyp
+	call floatmul
+	pop
+	sout
+	ldc 10
+	aout
+	ja main
+		
+endp:
+	halt
+	
+
+	
+floatmul:
+	
+	ldc 0
+	st xflag
+	st yflag
+	st xpoint
+	st ypoint
+	ldr 2
+	sub @1
+	st xp
+	ldr 1
+	sub @1
+	st yp
+zerosaltx:
+	ld xp
+	add @1
+	st xp
+	ldi 
+	sub @0
+	jz zerosaltx
+	ld xp
+	sub @1
+	st xp
+scanIx:
+	ld xp
+	add @1
+	st xp
+	ldi 
+	sub @sign
+	jz negative
+	ld xp
+	ldi 
+	sub @point
+	jz scanFx
+	ld xp
+	ldi 
+	sub @0
+	jn zerosalty
+	ld xp
+	ldi 
+	sub @9
+	sub @1
+	jzop zerosalty
+	ld xp
+	ldi 
+	sub @0
+	push
+	ld inbufxp
+	sti
+	ld inbufxp
+	add @1
+	st inbufxp
+	ja scanIx
+negative:
+	ldc 1
+	st xflag
+	ja zerosaltx
+	
+scanFx:
+	ld xp
+	add @1
+	st xp
+	ldi 
+	sub @0
+	jn zerosalty
+	ld xp
+	ldi 
+	sub @9
+	sub @1
+	jzop zerosalty
+	ld xp
+	ldi 
+	sub @0
+	push
+	ld inbufxp
+	sti
+	ld inbufxp
+	add @1
+	st inbufxp
+	ld xpoint
+	add @1
+	st xpoint
+	ja scanFx
+	
+zerosalty:
+	ld yp
+	add @1
+	st yp
+	ldi 
+	sub @0
+	jz zerosalty
+	ld yp
+	sub @1
+	st yp
+	
+scanIy:
+	ld yp
+	add @1
+	st yp
+	ld yp
+	ldi 
+	sub @sign
+	jz negativey
+	ld yp
+	ldi 
+	sub @point
+	jz scanFy
+	ld yp
+	ldi 
+	sub @0
+	jn multF
+	ld yp
+	ldi 
+	sub @9
+	sub @1
+	jzop multF
+	ld yp
+	ldi 
+	sub @0
+	push
+	ld inbufyp
+	sti
+	ld inbufyp
+	add @1
+	st inbufyp
+	ja scanIy
+negativey:
+	ldc 1
+	st yflag
+	ja zerosalty
+	
+scanFy:
+	ld yp
+	add @1
+	st yp
+	ldi 
+	sub @0
+	jn end_scanFy
+	ld yp
+	ldi 
+	sub @9
+	sub @1
+	jzop end_scanFy
+	ld yp
+	ldi 
+	sub @0
+	push
+	ld inbufyp
+	sti
+	ld inbufyp
+	add @1
+	st inbufyp
+	ld ypoint
+	add @1
+	st ypoint
+	ja scanFy
+	
+end_scanFy:
+	
+
+multF:
+	swap
+	st stack
+	swap
+	ldc z
+	st zp
+	ldc inbufx
+	st aux
+	ld inbufxp
+	sub aux
+	st xm
+	jz zeroResult
+	ldc inbufy
+	st aux
+	ld inbufyp
+	sub aux
+	st ym
+	jz zeroResult
+	ldc zout
+	st zoutp
+	ldc 0
+	st j
+	ldc 0
+	st aux
+	ldc z
+	st zp
+init0:
+	ldc 100
+	sub aux
+	jz end_init0
+	ldc 0
+	push
+	ld zp
+	sti
+	ld zp
+	add @1
+	st zp
+	ld aux
+	add @1
+	st aux
+	ja init0
+end_init0:
+
+	ld inbufxp
+	sub @1
+	ldi
+	push
+	ld inbufyp
+	sub @1
+	ldi
+	push
+	call mult
+	ldr 1
+	push
+	ldc 10
+	push
+	call div
+	ld R
+	
+forj:
+	ld j
+	sub ym
+	sub @1
+	jzop outj
+	ld ym
+	sub j
+	st k
+	ldc 0
+	st i
+	ld j
+	add @1
+	st j
+fori:
+	ld i
+	sub xm
+	sub @1		
+	jzop outi
+	ld xm
+	sub i
+	st m
+	ldc inbufx
+	add m
+	ldi
+	push
+	ldc inbufy
+	add k
+	ldi
+	push
+	call mult
+	ldr 1
+	st s
+	ldc z
+	add m
+	add k
+	add @1
+	ldi
+	add s
+	add c
+	st s
+	ld s
+	push
+	ldc 10
+	push
+	call div
+	ld Q
+	st c
+	ld R
+	push
+	ldc z
+	add k
+	add m
+	add @1
+	sti
+	ld i
+	add @1
+	st i
+	ja fori
+outi:
+	ldc z
+	add k
+	add m
+	ldi
+	add c
+	push
+	ldc z
+	add k
+	add m
+	sti
+	ldc 0
+	st c
+	ja forj
+outj:
+	
+
+convertToString:
+	ld ym
+	add xm
+	add @1
+	st aux
+	ldc z
+	sub @1
+	st zp
+saltar:
+	ld zp
+	add @1
+	st zp
+	ld zp 
+	ldi
+	jz saltar
+	ld zp
+	add ym
+	add xm
+	sub @1
+	ldi
+	jnz no_adde
+	ld xpoint
+	add @1
+	st xpoint
+no_adde:
+	ldc zout
+	st zoutp
+	ld xflag
+	sub yflag
+	jz loop_convert
+	ld @sign
+	push
+	ld zoutp
+	sti
+	ld zoutp
+	add @1
+	st zoutp
+loop_convert:
+	ld aux
+	sub @1
+	st aux
+	jn end_loop_convert
+	ld aux
+	sub xpoint
+	sub ypoint
+	jz puntar
+	ld zp
+	ldi
+	add @0
+	push
+	ld zoutp
+	sti
+	st zoutp
+	ld zoutp
+	add @1
+	st zoutp
+	ld zp
+	add @1
+	st zp
+	ja loop_convert
+puntar:
+	ld @point
+	push
+	ld zoutp
+	sti
+	ld zoutp
+	add @1
+	st zoutp
+	ja loop_convert
+	
+end_loop_convert:
+	ldc 0
+	push
+	ld zoutp
+	sti
+	swap
+	ld stack
+	swap
+	ldc zout
+	str 1
+	ret
+	
+zeroResult:
+	ldc 0
+	dout
+	ldc 10
+	aout
+	ja main
+	
+mult:
+	ldc 0
+	st counterMul
+	ldr 2
+	st numberMul
+	ldc 0
+	str 2
+	
+	
+loop_mult:
+	ldr 1
+	sub counterMul
+	jz end_loop_mult
+	jn end_loop_mult
+	ldr 2
+	add numberMul
+	str 2
+	ld counterMul
+	add @1
+	st counterMul
+	ja loop_mult
+
+counterMul: dw 0
+numberMul: dw 0
+end_loop_mult:
+	ret
+
+div:
+	ldc 0
+	st Q
+	ldr 2
+	st R
+	ldr 1
+	st D
+	
+loop_div:
+	ld R
+	sub D
+	jn end_loop_div
+	ld Q
+	add @1
+	st Q
+	ld R
+	sub D
+	st R
+	ja loop_div
+R: dw 0
+Q: dw 0
+D: dw 0
+end_loop_div:
+	ret
+main:
+	call clear
+	ldc ask
+	sout
+	ain
+	sub y
+	jnz endp
+	ja end2
+	
+	
+clear:
+	ldc DATA
+	st aux
+	ldc 620
+	st aux2
+	ldc DATA
+	add aux2
+	st aux2
+loop_clear:
+	ldc 0
+	push
+	ld aux
+	sub aux2
+	jzop end_clear
+	ld aux
+	sti
+	ld aux
+	add @1
+	st aux
+	ja loop_clear
+end_clear:
+	pop
+	ret
+
+enterString: dw "Enter the first decimal number\n"
+enterString2: dw "Enter the second decimal number\n"
+ask: dw "floating point multiplication ? (y/N)\n"
+y: dw 'y'
+@1: dw 1
+@0: dw '0'
+@9: dw '9'
+@sign: dw '-'
+@point: dw '.'
+aux: dw 0
+aux2: dw 621
+DATA:
+xin: dw 100 dup 0
+yin: dw 100 dup 0
+inbufx: dw 100 dup 0
+inbufxp: dw 0
+inbufy: dw 100 dup 0
+inbufyp: dw 0
+xflag: dw 0
+yflag: dw 0
+zeroflag: dw 0
+xpoint: dw 0
+ypoint: dw 0
+k: dw 0
+m: dw 0
+xm: dw 0
+ym: dw 0
+j: dw 0
+i: dw 0
+c: dw 0
+zoutp: dw 0
+zp: dw 0
+xp: dw 0
+yp: dw 0
+s: dw 0
+stack: dw 0
+zout: dw 100 dup 0
+z: dw 100 dub 0

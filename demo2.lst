@@ -1,0 +1,765 @@
+Machine-level Assembler Version 6.3    Mon Dec 24 08:52:24 2018
+
+  LOC    OBJ   SOURCE
+hex*dec
+
+               
+               end2:
+0  *0    81B0  	ldc enterString		; input string as number
+1  *1    FFF7  	sout
+2  *2    8220  	ldc xin
+3  *3    F300  	push				; push them to stack
+4  *4    FFF6  	sin
+5  *5    81D0  	ldc enterString2
+6  *6    FFF7  	sout
+7  *7    8284  	ldc yin
+8  *8    F300  	push
+9  *9    FFF6  	sin
+               init:
+A  *10   82E8  	ldc inbufx
+B  *11   134C  	st inbufxp
+C  *12   834D  	ldc inbufy
+D  *13   13B1  	st inbufyp
+E  *14   E015  	call floatmul
+F  *15   F400  	pop
+10 *16   FFF7  	sout
+11 *17   800A  	ldc 10
+12 *18   FFFB  	aout
+13 *19   9195  	ja main
+               		
+               endp:
+14 *20   FFFF  	halt
+               	
+               
+               	
+               floatmul:
+               	
+15 *21   8000  	ldc 0
+16 *22   13B2  	st xflag
+17 *23   13B3  	st yflag
+18 *24   13B5  	st xpoint
+19 *25   13B6  	st ypoint
+1A *26   4002  	ldr 2
+1B *27   3219  	sub @1
+1C *28   13C0  	st xp
+1D *29   4001  	ldr 1
+1E *30   3219  	sub @1
+1F *31   13C1  	st yp
+               zerosaltx:
+20 *32   03C0  	ld xp
+21 *33   2219  	add @1
+22 *34   13C0  	st xp
+23 *35   F100  	ldi 
+24 *36   321A  	sub @0
+25 *37   C020  	jz zerosaltx
+26 *38   03C0  	ld xp
+27 *39   3219  	sub @1
+28 *40   13C0  	st xp
+               scanIx:
+29 *41   03C0  	ld xp
+2A *42   2219  	add @1
+2B *43   13C0  	st xp
+2C *44   F100  	ldi 
+2D *45   321C  	sub @sign
+2E *46   C046  	jz negative
+2F *47   03C0  	ld xp
+30 *48   F100  	ldi 
+31 *49   321D  	sub @point
+32 *50   C049  	jz scanFx
+33 *51   03C0  	ld xp
+34 *52   F100  	ldi 
+35 *53   321A  	sub @0
+36 *54   B061  	jn zerosalty
+37 *55   03C0  	ld xp
+38 *56   F100  	ldi 
+39 *57   321B  	sub @9
+3A *58   3219  	sub @1
+3B *59   A061  	jzop zerosalty
+3C *60   03C0  	ld xp
+3D *61   F100  	ldi 
+3E *62   321A  	sub @0
+3F *63   F300  	push
+40 *64   034C  	ld inbufxp
+41 *65   F200  	sti
+42 *66   034C  	ld inbufxp
+43 *67   2219  	add @1
+44 *68   134C  	st inbufxp
+45 *69   9029  	ja scanIx
+               negative:
+46 *70   8001  	ldc 1
+47 *71   13B2  	st xflag
+48 *72   9020  	ja zerosaltx
+               	
+               scanFx:
+49 *73   03C0  	ld xp
+4A *74   2219  	add @1
+4B *75   13C0  	st xp
+4C *76   F100  	ldi 
+4D *77   321A  	sub @0
+4E *78   B061  	jn zerosalty
+4F *79   03C0  	ld xp
+50 *80   F100  	ldi 
+51 *81   321B  	sub @9
+52 *82   3219  	sub @1
+53 *83   A061  	jzop zerosalty
+54 *84   03C0  	ld xp
+55 *85   F100  	ldi 
+56 *86   321A  	sub @0
+57 *87   F300  	push
+58 *88   034C  	ld inbufxp
+59 *89   F200  	sti
+5A *90   034C  	ld inbufxp
+5B *91   2219  	add @1
+5C *92   134C  	st inbufxp
+5D *93   03B5  	ld xpoint
+5E *94   2219  	add @1
+5F *95   13B5  	st xpoint
+60 *96   9049  	ja scanFx
+               	
+               zerosalty:
+61 *97   03C1  	ld yp
+62 *98   2219  	add @1
+63 *99   13C1  	st yp
+64 *100  F100  	ldi 
+65 *101  321A  	sub @0
+66 *102  C061  	jz zerosalty
+67 *103  03C1  	ld yp
+68 *104  3219  	sub @1
+69 *105  13C1  	st yp
+               	
+               scanIy:
+6A *106  03C1  	ld yp
+6B *107  2219  	add @1
+6C *108  13C1  	st yp
+6D *109  03C1  	ld yp
+6E *110  F100  	ldi 
+6F *111  321C  	sub @sign
+70 *112  C088  	jz negativey
+71 *113  03C1  	ld yp
+72 *114  F100  	ldi 
+73 *115  321D  	sub @point
+74 *116  C08B  	jz scanFy
+75 *117  03C1  	ld yp
+76 *118  F100  	ldi 
+77 *119  321A  	sub @0
+78 *120  B0A3  	jn multF
+79 *121  03C1  	ld yp
+7A *122  F100  	ldi 
+7B *123  321B  	sub @9
+7C *124  3219  	sub @1
+7D *125  A0A3  	jzop multF
+7E *126  03C1  	ld yp
+7F *127  F100  	ldi 
+80 *128  321A  	sub @0
+81 *129  F300  	push
+82 *130  03B1  	ld inbufyp
+83 *131  F200  	sti
+84 *132  03B1  	ld inbufyp
+85 *133  2219  	add @1
+86 *134  13B1  	st inbufyp
+87 *135  906A  	ja scanIy
+               negativey:
+88 *136  8001  	ldc 1
+89 *137  13B3  	st yflag
+8A *138  9061  	ja zerosalty
+               	
+               scanFy:
+8B *139  03C1  	ld yp
+8C *140  2219  	add @1
+8D *141  13C1  	st yp
+8E *142  F100  	ldi 
+8F *143  321A  	sub @0
+90 *144  B0A3  	jn end_scanFy
+91 *145  03C1  	ld yp
+92 *146  F100  	ldi 
+93 *147  321B  	sub @9
+94 *148  3219  	sub @1
+95 *149  A0A3  	jzop end_scanFy
+96 *150  03C1  	ld yp
+97 *151  F100  	ldi 
+98 *152  321A  	sub @0
+99 *153  F300  	push
+9A *154  03B1  	ld inbufyp
+9B *155  F200  	sti
+9C *156  03B1  	ld inbufyp
+9D *157  2219  	add @1
+9E *158  13B1  	st inbufyp
+9F *159  03B6  	ld ypoint
+A0 *160  2219  	add @1
+A1 *161  13B6  	st ypoint
+A2 *162  908B  	ja scanFy
+               	
+               end_scanFy:
+               	
+               
+               multF:
+A3 *163  F700  	swap
+A4 *164  13C3  	st stack
+A5 *165  F700  	swap
+A6 *166  8428  	ldc z
+A7 *167  13BF  	st zp
+A8 *168  82E8  	ldc inbufx
+A9 *169  121E  	st aux
+AA *170  034C  	ld inbufxp
+AB *171  321E  	sub aux
+AC *172  13B9  	st xm
+AD *173  C168  	jz zeroResult
+AE *174  834D  	ldc inbufy
+AF *175  121E  	st aux
+B0 *176  03B1  	ld inbufyp
+B1 *177  321E  	sub aux
+B2 *178  13BA  	st ym
+B3 *179  C168  	jz zeroResult
+B4 *180  83C4  	ldc zout
+B5 *181  13BE  	st zoutp
+B6 *182  8000  	ldc 0
+B7 *183  13BB  	st j
+B8 *184  8000  	ldc 0
+B9 *185  121E  	st aux
+BA *186  8428  	ldc z
+BB *187  13BF  	st zp
+               init0:
+BC *188  8064  	ldc 100
+BD *189  321E  	sub aux
+BE *190  C0CA  	jz end_init0
+BF *191  8000  	ldc 0
+C0 *192  F300  	push
+C1 *193  03BF  	ld zp
+C2 *194  F200  	sti
+C3 *195  03BF  	ld zp
+C4 *196  2219  	add @1
+C5 *197  13BF  	st zp
+C6 *198  021E  	ld aux
+C7 *199  2219  	add @1
+C8 *200  121E  	st aux
+C9 *201  90BC  	ja init0
+               end_init0:
+               
+CA *202  034C  	ld inbufxp
+CB *203  3219  	sub @1
+CC *204  F100  	ldi
+CD *205  F300  	push
+CE *206  03B1  	ld inbufyp
+CF *207  3219  	sub @1
+D0 *208  F100  	ldi
+D1 *209  F300  	push
+D2 *210  E16D  	call mult
+D3 *211  4001  	ldr 1
+D4 *212  F300  	push
+D5 *213  800A  	ldc 10
+D6 *214  F300  	push
+D7 *215  E181  	call div
+D8 *216  0191  	ld R
+               	
+               forj:
+D9 *217  03BB  	ld j
+DA *218  33BA  	sub ym
+DB *219  3219  	sub @1
+DC *220  A11E  	jzop outj
+DD *221  03BA  	ld ym
+DE *222  33BB  	sub j
+DF *223  13B7  	st k
+E0 *224  8000  	ldc 0
+E1 *225  13BC  	st i
+E2 *226  03BB  	ld j
+E3 *227  2219  	add @1
+E4 *228  13BB  	st j
+               fori:
+E5 *229  03BC  	ld i
+E6 *230  33B9  	sub xm
+E7 *231  3219  	sub @1		
+E8 *232  A111  	jzop outi
+E9 *233  03B9  	ld xm
+EA *234  33BC  	sub i
+EB *235  13B8  	st m
+EC *236  82E8  	ldc inbufx
+ED *237  23B8  	add m
+EE *238  F100  	ldi
+EF *239  F300  	push
+F0 *240  834D  	ldc inbufy
+F1 *241  23B7  	add k
+F2 *242  F100  	ldi
+F3 *243  F300  	push
+F4 *244  E16D  	call mult
+F5 *245  4001  	ldr 1
+F6 *246  13C2  	st s
+F7 *247  8428  	ldc z
+F8 *248  23B8  	add m
+F9 *249  23B7  	add k
+FA *250  2219  	add @1
+FB *251  F100  	ldi
+FC *252  23C2  	add s
+FD *253  23BD  	add c
+FE *254  13C2  	st s
+FF *255  03C2  	ld s
+100*256  F300  	push
+101*257  800A  	ldc 10
+102*258  F300  	push
+103*259  E181  	call div
+104*260  0192  	ld Q
+105*261  13BD  	st c
+106*262  0191  	ld R
+107*263  F300  	push
+108*264  8428  	ldc z
+109*265  23B7  	add k
+10A*266  23B8  	add m
+10B*267  2219  	add @1
+10C*268  F200  	sti
+10D*269  03BC  	ld i
+10E*270  2219  	add @1
+10F*271  13BC  	st i
+110*272  90E5  	ja fori
+               outi:
+111*273  8428  	ldc z
+112*274  23B7  	add k
+113*275  23B8  	add m
+114*276  F100  	ldi
+115*277  23BD  	add c
+116*278  F300  	push
+117*279  8428  	ldc z
+118*280  23B7  	add k
+119*281  23B8  	add m
+11A*282  F200  	sti
+11B*283  8000  	ldc 0
+11C*284  13BD  	st c
+11D*285  90D9  	ja forj
+               outj:
+               	
+               
+               convertToString:
+11E*286  03BA  	ld ym
+11F*287  23B9  	add xm
+120*288  2219  	add @1
+121*289  121E  	st aux
+122*290  8428  	ldc z
+123*291  3219  	sub @1
+124*292  13BF  	st zp
+               saltar:
+125*293  03BF  	ld zp
+126*294  2219  	add @1
+127*295  13BF  	st zp
+128*296  03BF  	ld zp 
+129*297  F100  	ldi
+12A*298  C125  	jz saltar
+12B*299  03BF  	ld zp
+12C*300  23BA  	add ym
+12D*301  23B9  	add xm
+12E*302  3219  	sub @1
+12F*303  F100  	ldi
+130*304  D134  	jnz no_adde
+131*305  03B5  	ld xpoint
+132*306  2219  	add @1
+133*307  13B5  	st xpoint
+               no_adde:
+134*308  83C4  	ldc zout
+135*309  13BE  	st zoutp
+136*310  03B2  	ld xflag
+137*311  33B3  	sub yflag
+138*312  C140  	jz loop_convert
+139*313  021C  	ld @sign
+13A*314  F300  	push
+13B*315  03BE  	ld zoutp
+13C*316  F200  	sti
+13D*317  03BE  	ld zoutp
+13E*318  2219  	add @1
+13F*319  13BE  	st zoutp
+               loop_convert:
+140*320  021E  	ld aux
+141*321  3219  	sub @1
+142*322  121E  	st aux
+143*323  B15E  	jn end_loop_convert
+144*324  021E  	ld aux
+145*325  33B5  	sub xpoint
+146*326  33B6  	sub ypoint
+147*327  C156  	jz puntar
+148*328  03BF  	ld zp
+149*329  F100  	ldi
+14A*330  221A  	add @0
+14B*331  F300  	push
+14C*332  03BE  	ld zoutp
+14D*333  F200  	sti
+14E*334  13BE  	st zoutp
+14F*335  03BE  	ld zoutp
+150*336  2219  	add @1
+151*337  13BE  	st zoutp
+152*338  03BF  	ld zp
+153*339  2219  	add @1
+154*340  13BF  	st zp
+155*341  9140  	ja loop_convert
+               puntar:
+156*342  021D  	ld @point
+157*343  F300  	push
+158*344  03BE  	ld zoutp
+159*345  F200  	sti
+15A*346  03BE  	ld zoutp
+15B*347  2219  	add @1
+15C*348  13BE  	st zoutp
+15D*349  9140  	ja loop_convert
+               	
+               end_loop_convert:
+15E*350  8000  	ldc 0
+15F*351  F300  	push
+160*352  03BE  	ld zoutp
+161*353  F200  	sti
+162*354  F700  	swap
+163*355  03C3  	ld stack
+164*356  F700  	swap
+165*357  83C4  	ldc zout
+166*358  5001  	str 1
+167*359  F000  	ret
+               	
+               zeroResult:
+168*360  8000  	ldc 0
+169*361  FFFD  	dout
+16A*362  800A  	ldc 10
+16B*363  FFFB  	aout
+16C*364  9195  	ja main
+               	
+               mult:
+16D*365  8000  	ldc 0
+16E*366  117E  	st counterMul
+16F*367  4002  	ldr 2
+170*368  117F  	st numberMul
+171*369  8000  	ldc 0
+172*370  5002  	str 2
+               	
+               	
+               loop_mult:
+173*371  4001  	ldr 1
+174*372  317E  	sub counterMul
+175*373  C180  	jz end_loop_mult
+176*374  B180  	jn end_loop_mult
+177*375  4002  	ldr 2
+178*376  217F  	add numberMul
+179*377  5002  	str 2
+17A*378  017E  	ld counterMul
+17B*379  2219  	add @1
+17C*380  117E  	st counterMul
+17D*381  9173  	ja loop_mult
+               
+17E*382  0000  counterMul: dw 0
+17F*383  0000  numberMul: dw 0
+               end_loop_mult:
+180*384  F000  	ret
+               
+               div:
+181*385  8000  	ldc 0
+182*386  1192  	st Q
+183*387  4002  	ldr 2
+184*388  1191  	st R
+185*389  4001  	ldr 1
+186*390  1193  	st D
+               	
+               loop_div:
+187*391  0191  	ld R
+188*392  3193  	sub D
+189*393  B194  	jn end_loop_div
+18A*394  0192  	ld Q
+18B*395  2219  	add @1
+18C*396  1192  	st Q
+18D*397  0191  	ld R
+18E*398  3193  	sub D
+18F*399  1191  	st R
+190*400  9187  	ja loop_div
+191*401  0000  R: dw 0
+192*402  0000  Q: dw 0
+193*403  0000  D: dw 0
+               end_loop_div:
+194*404  F000  	ret
+               main:
+195*405  E19C  	call clear
+196*406  81F1  	ldc ask
+197*407  FFF7  	sout
+198*408  FFFA  	ain
+199*409  3218  	sub y
+19A*410  D014  	jnz endp
+19B*411  9000  	ja end2
+               	
+               	
+               clear:
+19C*412  8220  	ldc DATA
+19D*413  121E  	st aux
+19E*414  826C  	ldc 620
+19F*415  121F  	st aux2
+1A0*416  8220  	ldc DATA
+1A1*417  221F  	add aux2
+1A2*418  121F  	st aux2
+               loop_clear:
+1A3*419  8000  	ldc 0
+1A4*420  F300  	push
+1A5*421  021E  	ld aux
+1A6*422  321F  	sub aux2
+1A7*423  A1AE  	jzop end_clear
+1A8*424  021E  	ld aux
+1A9*425  F200  	sti
+1AA*426  021E  	ld aux
+1AB*427  2219  	add @1
+1AC*428  121E  	st aux
+1AD*429  91A3  	ja loop_clear
+               end_clear:
+1AE*430  F400  	pop
+1AF*431  F000  	ret
+               
+1B0*432  0045  enterString: dw "Enter the first decimal number\n"
+1B1*433  006E
+1B2*434  0074
+1B3*435  0065
+1B4*436  0072
+1B5*437  0020
+1B6*438  0074
+1B7*439  0068
+1B8*440  0065
+1B9*441  0020
+1BA*442  0066
+1BB*443  0069
+1BC*444  0072
+1BD*445  0073
+1BE*446  0074
+1BF*447  0020
+1C0*448  0064
+1C1*449  0065
+1C2*450  0063
+1C3*451  0069
+1C4*452  006D
+1C5*453  0061
+1C6*454  006C
+1C7*455  0020
+1C8*456  006E
+1C9*457  0075
+1CA*458  006D
+1CB*459  0062
+1CC*460  0065
+1CD*461  0072
+1CE*462  000A
+1CF*463  0000
+1D0*464  0045  enterString2: dw "Enter the second decimal number\n"
+1D1*465  006E
+1D2*466  0074
+1D3*467  0065
+1D4*468  0072
+1D5*469  0020
+1D6*470  0074
+1D7*471  0068
+1D8*472  0065
+1D9*473  0020
+1DA*474  0073
+1DB*475  0065
+1DC*476  0063
+1DD*477  006F
+1DE*478  006E
+1DF*479  0064
+1E0*480  0020
+1E1*481  0064
+1E2*482  0065
+1E3*483  0063
+1E4*484  0069
+1E5*485  006D
+1E6*486  0061
+1E7*487  006C
+1E8*488  0020
+1E9*489  006E
+1EA*490  0075
+1EB*491  006D
+1EC*492  0062
+1ED*493  0065
+1EE*494  0072
+1EF*495  000A
+1F0*496  0000
+1F1*497  0066  ask: dw "floating point multiplication ? (y/N)\n"
+1F2*498  006C
+1F3*499  006F
+1F4*500  0061
+1F5*501  0074
+1F6*502  0069
+1F7*503  006E
+1F8*504  0067
+1F9*505  0020
+1FA*506  0070
+1FB*507  006F
+1FC*508  0069
+1FD*509  006E
+1FE*510  0074
+1FF*511  0020
+200*512  006D
+201*513  0075
+202*514  006C
+203*515  0074
+204*516  0069
+205*517  0070
+206*518  006C
+207*519  0069
+208*520  0063
+209*521  0061
+20A*522  0074
+20B*523  0069
+20C*524  006F
+20D*525  006E
+20E*526  0020
+20F*527  003F
+210*528  0020
+211*529  0028
+212*530  0079
+213*531  002F
+214*532  004E
+215*533  0029
+216*534  000A
+217*535  0000
+218*536  0079  y: dw 'y'
+219*537  0001  @1: dw 1
+21A*538  0030  @0: dw '0'
+21B*539  0039  @9: dw '9'
+21C*540  002D  @sign: dw '-'
+21D*541  002E  @point: dw '.'
+21E*542  0000  aux: dw 0
+21F*543  026D  aux2: dw 621
+               DATA:
+220*544  0000  xin: dw 100 dup 0
+284*644  0000  yin: dw 100 dup 0
+2E8*744  0000  inbufx: dw 100 dup 0
+34C*844  0000  inbufxp: dw 0
+34D*845  0000  inbufy: dw 100 dup 0
+3B1*945  0000  inbufyp: dw 0
+3B2*946  0000  xflag: dw 0
+3B3*947  0000  yflag: dw 0
+3B4*948  0000  zeroflag: dw 0
+3B5*949  0000  xpoint: dw 0
+3B6*950  0000  ypoint: dw 0
+3B7*951  0000  k: dw 0
+3B8*952  0000  m: dw 0
+3B9*953  0000  xm: dw 0
+3BA*954  0000  ym: dw 0
+3BB*955  0000  j: dw 0
+3BC*956  0000  i: dw 0
+3BD*957  0000  c: dw 0
+3BE*958  0000  zoutp: dw 0
+3BF*959  0000  zp: dw 0
+3C0*960  0000  xp: dw 0
+3C1*961  0000  yp: dw 0
+3C2*962  0000  s: dw 0
+3C3*963  0000  stack: dw 0
+3C4*964  0000  zout: dw 100 dup 0
+428*1064 0064  z: dw 100 dub 0
+429*1065 ========= end of demo2.mas ==============================
+
+
+         Symbol/Cross-Reference Table
+
+Symbol                   Address     References
+                          (hex)       (hex)
+
+ end2                      0           19B
+ init                      A          
+ endp                      14          19A
+ floatmul                  15          E  
+ zerosaltx                 20          25  48 
+ scanIx                    29          45 
+ negative                  46          2E 
+ scanFx                    49          32  60 
+ zerosalty                 61          36  3B  4E  53  66 
+                                       8A 
+ scanIy                    6A          87 
+ negativey                 88          70 
+ scanFy                    8B          74  A2 
+ end_scanFy                A3          90  95 
+ multF                     A3          78  7D 
+ init0                     BC          C9 
+ end_init0                 CA          BE 
+ forj                      D9          11D
+ fori                      E5          110
+ outi                      111         E8 
+ outj                      11E         DC 
+ convertToString           11E        
+ saltar                    125         12A
+ no_adde                   134         130
+ loop_convert              140         138 155 15D
+ puntar                    156         147
+ end_loop_convert          15E         143
+ zeroResult                168         AD  B3 
+ mult                      16D         D2  F4 
+ loop_mult                 173         17D
+ counterMul                17E         16E 174 17A 17C
+ numberMul                 17F         170 178
+ end_loop_mult             180         175 176
+ div                       181         D7  103
+ loop_div                  187         190
+ R                         191         D8  106 184 187 18D
+                                       18F
+ Q                         192         104 182 18A 18C
+ D                         193         186 188 18E
+ end_loop_div              194         189
+ main                      195         13  16C
+ clear                     19C         195
+ loop_clear                1A3         1AD
+ end_clear                 1AE         1A7
+ enterString               1B0         0  
+ enterString2              1D0         5  
+ ask                       1F1         196
+ y                         218         199
+ @1                        219         1B  1E  21  27  2A 
+                                       3A  43  4A  52  5B 
+                                       5E  62  68  6B  7C 
+                                       85  8C  94  9D  A0 
+                                       C4  C7  CB  CF  DB 
+                                       E3  E7  FA  10B 10E
+                                       120 123 126 12E 132
+                                       13E 141 150 153 15B
+                                       17B 18B 1AB
+ @0                        21A         24  35  3E  4D  56 
+                                       65  77  80  8F  98 
+                                       14A
+ @9                        21B         39  51  7B  93 
+ @sign                     21C         2D  6F  139
+ @point                    21D         31  73  156
+ aux                       21E         A9  AB  AF  B1  B9 
+                                       BD  C6  C8  121 140
+                                       142 144 19D 1A5 1A8
+                                       1AA 1AC
+ aux2                      21F         19F 1A1 1A2 1A6
+ DATA                      220         19C 1A0
+ xin                       220         2  
+ yin                       284         7  
+ inbufx                    2E8         A   A8  EC 
+ inbufxp                   34C         B   40  42  44  58 
+                                       5A  5C  AA  CA 
+ inbufy                    34D         C   AE  F0 
+ inbufyp                   3B1         D   82  84  86  9A 
+                                       9C  9E  B0  CE 
+ xflag                     3B2         16  47  136
+ yflag                     3B3         17  89  137
+ zeroflag                  3B4        
+ xpoint                    3B5         18  5D  5F  131 133
+                                       145
+ ypoint                    3B6         19  9F  A1  146
+ k                         3B7         DF  F1  F9  109 112
+                                       118
+ m                         3B8         EB  ED  F8  10A 113
+                                       119
+ xm                        3B9         AC  E6  E9  11F 12D
+ ym                        3BA         B2  DA  DD  11E 12C
+ j                         3BB         B7  D9  DE  E2  E4 
+ i                         3BC         E1  E5  EA  10D 10F
+ c                         3BD         FD  105 115 11C
+ zoutp                     3BE         B5  135 13B 13D 13F
+                                       14C 14E 14F 151 158
+                                       15A 15C 160
+ zp                        3BF         A7  BB  C1  C3  C5 
+                                       124 125 127 128 12B
+                                       148 152 154
+ xp                        3C0         1C  20  22  26  28 
+                                       29  2B  2F  33  37 
+                                       3C  49  4B  4F  54 
+ yp                        3C1         1F  61  63  67  69 
+                                       6A  6C  6D  71  75 
+                                       79  7E  8B  8D  91 
+                                       96 
+ s                         3C2         F6  FC  FE  FF 
+ stack                     3C3         A4  163
+ zout                      3C4         B4  134 165
+ z                         428         A6  BA  F7  108 111
+                                       117 122
+
+Input file   = demo2.mas
+Output file  = demo2.mac
+List file    = demo2.lst 
+Number base  = decimal
+Label status = case sensitive

@@ -1,0 +1,29 @@
+sim Version 6.3 Log File demo1.log
+
+Your name          = Run mod sim /r to put your name here
+Machinecode file   = demo1.mac    Size =  50 (hex) =   80 (dec)
+Microcode file     = s1.hor       Size =  9C (hex) =  156 (dec)
+Config file        = s1.cfg
+======================== Log turned on  Sun Dec 23 23:50:11 2018
+======================== Starting session ======================
+---- [T7] 0: ldc  /8 010/ N
+No display mode
+---- [T7] G
+do you to perform stack or y/nY
+enter two hexadecimal number = 34A0h
+E9F1h
+FDF1do you to perform stack or y/ny
+enter two hexadecimal number = ABCDh
+1234h
+BBFDdo you to perform stack or y/nY
+enter two hexadecimal number = 1234h
+DCBAh
+DEDEdo you to perform stack or y/nY
+enter two hexadecimal number = 0101h
+0101h
+0101do you to perform stack or y/nn
+
+Machine inst count =    42 (hex) =     66 (dec)
+Micro   inst count =   20B (hex) =    523 (dec)
+---- [T7] Q
+================== sim(5105) terminated Sun Dec 23 23:55:54 2018

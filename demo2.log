@@ -1,0 +1,16 @@
+sim Version 6.3 Log File demo2.log
+
+Your name          = Run mod sim /r to put your name here
+Machinecode file   = demo2.mac    Size = 429 (hex) = 1065 (dec)
+Microcode file     = none         Size =  93 (hex) =  147 (dec)
+======================== Log turned on  Mon Dec 24 08:55:41 2018
+======================== Starting session ======================
+---- [T7] 0: ldc  /8 1B0/ n
+No display mode
+---- [T7] g
+Enter the first decimal number
+0.1
+Enter the second decimal number
+-1
+-.10
+floating point multiplication
